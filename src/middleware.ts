@@ -90,6 +90,14 @@ export function middleware(request: NextRequest, event: NextFetchEvent) {
   const redirect = canonicalRedirect(request);
   if (redirect) return redirect;
 
+  if (request.nextUrl.pathname === "/_wayo/live" || request.nextUrl.pathname === "/wayo-live") {
+    const response = request.nextUrl.pathname === "/wayo-live"
+      ? NextResponse.next()
+      : NextResponse.rewrite(rewriteTarget(request, "/wayo-live"));
+    response.headers.set("Cache-Control", "private, no-cache, no-store, max-age=0, must-revalidate");
+    return response;
+  }
+
   if (request.nextUrl.pathname.startsWith("/admin")) {
     const response = handleAuth(request, event);
     if (response instanceof Response) {

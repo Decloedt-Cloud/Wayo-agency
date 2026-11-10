@@ -18,7 +18,7 @@ function sendMaintenance(response) {
   const html = maintenancePage();
   response.writeHead(503, {
     "Content-Type": "text/html; charset=utf-8",
-    "Retry-After": "300",
+    "Retry-After": "2",
     "Cache-Control": "no-store, max-age=0",
   });
   response.end(html);
@@ -30,6 +30,16 @@ const server = http.createServer((request, response) => {
     active = fs.existsSync(flagPath);
   } catch {
     active = false;
+  }
+  const path = (request.url || "/").split("?")[0];
+  if (path === "/_wayo/live") {
+    response.writeHead(active ? 503 : 204, {
+      "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate",
+      "Content-Type": "text/plain; charset=utf-8",
+      "Pragma": "no-cache",
+    });
+    response.end(active ? "maintenance" : "");
+    return;
   }
   if (active) {
     sendMaintenance(response);

@@ -103,7 +103,6 @@
     }
     @media (prefers-reduced-motion: reduce) { .track span { animation: none; width: 100%; } }
   </style>
-  <meta http-equiv="refresh" content="300">
 </head>
 <body>
   <header class="site-header">
@@ -190,7 +189,14 @@
       document.querySelectorAll(".lang").forEach(function (button) {
         button.addEventListener("click", function () { setLang(button.getAttribute("data-lang")); });
       });
-      setTimeout(function () { location.reload(); }, 300000);
+      function watch() {
+        if (document.hidden) return;
+        fetch("/_wayo/live", { cache: "no-store", headers: { Accept: "text/plain" } }).then(function (response) {
+          if (response.status !== 503) location.replace(location.pathname + location.search);
+        }).catch(function () {});
+      }
+      setInterval(watch, 2000);
+      document.addEventListener("visibilitychange", watch);
     })();
   </script>
 </body>

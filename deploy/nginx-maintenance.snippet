@@ -19,7 +19,7 @@ location @maintenance {
     root /var/www/wayoagency-maintenance;
     try_files /index.html =503;
     add_header Content-Security-Policy "default-src 'self'; font-src 'self' https://fonts.gstatic.com data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'" always;
-    add_header Retry-After 300 always;
+    add_header Retry-After 2 always;
     add_header Cache-Control "no-store, max-age=0" always;
 }
 

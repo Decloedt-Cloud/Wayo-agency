@@ -63,6 +63,9 @@ if [ ! -f ".last-deploy-hash" ] || [ "$(md5sum package.json 2>/dev/null | awk '{
   md5sum package.json | awk '{print $1}' > .last-deploy-hash
 fi
 
+echo "Vidage du cache..."
+rm -rf .next/cache .next/standalone/.next/cache
+
 echo "Build..."
 export NODE_OPTIONS="--max-old-space-size=2048${NODE_OPTIONS:+ $NODE_OPTIONS}"
 npm run build

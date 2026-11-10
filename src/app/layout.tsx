@@ -3,6 +3,8 @@ import { headers } from "next/headers";
 import type { ReactNode } from "react";
 import { Instrument_Serif, Inter_Tight, JetBrains_Mono, Noto_Naskh_Arabic, Noto_Sans_Arabic } from "next/font/google";
 import Script from "next/script";
+import { LiveStatus } from "@/components/client/LiveStatus";
+import { QuietLinks } from "@/components/client/QuietLinks";
 import { getUi } from "@/lib/copy";
 import { getLocale, getPathname } from "@/lib/get-locale";
 import { getTheme } from "@/lib/get-theme";
@@ -78,6 +80,8 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         <Script id="html-flags" nonce={(await headers()).get("x-nonce") ?? undefined} strategy="beforeInteractive">
           {`document.documentElement.classList.add("js");if(window.matchMedia("(prefers-reduced-motion: reduce)").matches){document.documentElement.classList.add("reduce");}if(!document.documentElement.dataset.theme){var m=document.cookie.match(/(?:^|; )theme=(light|dark)/);document.documentElement.dataset.theme=m?m[1]:(window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark");}`}
         </Script>
+        <QuietLinks />
+        <LiveStatus />
         <a className="skip" href="#contenu">{ui.skip}</a>
         {children}
       </body>

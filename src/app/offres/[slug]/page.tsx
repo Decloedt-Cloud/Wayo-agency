@@ -7,7 +7,7 @@ import { localePath } from "@/lib/locale";
 import { loadContent } from "@/lib/load-content";
 import { buildMetadata, jsonLd, serviceJsonLd } from "@/lib/seo";
 
-export const revalidate = 3600;
+export const revalidate = 0;
 
 async function offerFor(slug: string) {
   const locale = await getLocale();
