@@ -1,0 +1,38 @@
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: wayo
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d wayo"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgres://user:pass@postgres:5432/wayo
+      AUTH_SECRET: ${AUTH_SECRET:-change-me-in-production}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-}
+      ADMIN_PASSWORD_HASH: ${ADMIN_PASSWORD_HASH:-}
+      CONTACT_SMTP_HOST: ${CONTACT_SMTP_HOST:-}
+      CONTACT_SMTP_PORT: ${CONTACT_SMTP_PORT:-587}
+      CONTACT_SMTP_USER: ${CONTACT_SMTP_USER:-}
+      CONTACT_SMTP_PASS: ${CONTACT_SMTP_PASS:-}
+      CONTACT_SMTP_FROM: ${CONTACT_SMTP_FROM:-}
+      CONTACT_TO_EMAIL: ${CONTACT_TO_EMAIL:-}
+      IP_HASH_SALT: ${IP_HASH_SALT:-}
+      NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-http://localhost:3000}
+    depends_on:
+      postgres:
+        condition: service_healthy
+volumes:
+  pgdata:
