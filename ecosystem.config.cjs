@@ -34,12 +34,26 @@ const env = {
   ...process.env,
   ...loadEnv(path.join(projectRoot, ".env")),
   NODE_ENV: "production",
-  HOSTNAME: "127.0.0.1",
-  PORT: "3010",
+  HOSTNAME: "localhost",
+  PORT: "3011",
 };
 
 module.exports = {
   apps: [
+    {
+      name: "wayoagency-proxy",
+      script: path.join(projectRoot, "scripts/maintenance-proxy.cjs"),
+      cwd: projectRoot,
+      instances: 1,
+      exec_mode: "fork",
+      env: {
+        NODE_ENV: "production",
+        PORT: "3010",
+        APP_PORT: "3011",
+        MAINTENANCE_FLAG_PATH: "/var/www/wayoagency-maintenance.flag",
+        MAINTENANCE_HTML_PATH: "/var/www/wayoagency-maintenance/index.html",
+      },
+    },
     {
       name: "wayoagency",
       script: "server.js",

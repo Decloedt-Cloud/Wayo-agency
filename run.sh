@@ -81,9 +81,10 @@ npx tsx scripts/seed.ts
 
 pm2 delete "$APP_NAME" 2>/dev/null || true
 echo "Démarrage PM2 : $APP_NAME"
+pm2 start ecosystem.config.cjs --only wayoagency-proxy || pm2 restart wayoagency-proxy
 pm2 start ecosystem.config.cjs --only "$APP_NAME"
 pm2 save
-pm2 status "$APP_NAME"
+pm2 status wayoagency-proxy "$APP_NAME"
 
 release_maintenance
 echo "Déploiement terminé."

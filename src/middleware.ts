@@ -53,6 +53,34 @@ function canonicalRedirect(request: NextRequest): NextResponse | null {
   return NextResponse.redirect(url, 301);
 }
 
+function redirectTarget(request: NextRequest, pathname: string) {
+  const headerHost = request.headers.get("x-forwarded-host") ?? request.headers.get("host") ?? "";
+  const hostname = headerHost.split(":")[0];
+  const internal = !hostname || hostname === "localhost" || hostname === "127.0.0.1";
+  const configured = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  if (!internal) {
+    const proto = request.headers.get("x-forwarded-proto")?.split(",")[0]?.trim() === "http" ? "http" : "https";
+    const url = new URL(pathname, `${proto}://${headerHost}`);
+    url.search = request.nextUrl.search;
+    return url;
+  }
+  if (configured?.startsWith("https://")) {
+    const url = new URL(pathname, configured);
+    url.search = request.nextUrl.search;
+    return url;
+  }
+  const url = request.nextUrl.clone();
+  url.pathname = pathname;
+  url.protocol = "http:";
+  return url;
+}
+
+function rewriteTarget(request: NextRequest, pathname: string) {
+  const url = request.nextUrl.clone();
+  url.pathname = pathname;
+  return url;
+}
+
 function isPrefetch(request: NextRequest) {
   return request.headers.get("next-router-prefetch") === "1" || request.headers.get("purpose") === "prefetch";
 }
@@ -74,8 +102,7 @@ export function middleware(request: NextRequest, event: NextFetchEvent) {
   const requested = request.nextUrl.searchParams.get("lang");
 
   if (isLocale(requested)) {
-    const url = request.nextUrl.clone();
-    url.pathname = localePath(requested, path);
+    const url = redirectTarget(request, localePath(requested, path));
     url.searchParams.delete("lang");
     const redirect = NextResponse.redirect(url);
     if (!isPrefetch(request)) redirect.cookies.set(LOCALE_COOKIE, requested, cookie);
@@ -83,16 +110,14 @@ export function middleware(request: NextRequest, event: NextFetchEvent) {
   }
 
   if (prefix === "fr") {
-    const url = request.nextUrl.clone();
-    url.pathname = path;
+    const url = redirectTarget(request, path);
     const redirect = NextResponse.redirect(url);
     if (!isPrefetch(request)) redirect.cookies.set(LOCALE_COOKIE, "fr", cookie);
     return redirect;
   }
 
   if (prefix === "en" || prefix === "ar") {
-    const url = request.nextUrl.clone();
-    url.pathname = path;
+    const url = rewriteTarget(request, path);
     const headers = withPath(request, path, prefix);
     const policy = policyFor(headers, development);
     const response = NextResponse.rewrite(url, { request: { headers } });
@@ -105,7 +130,8 @@ export function middleware(request: NextRequest, event: NextFetchEvent) {
   const policy = policyFor(headers, development);
   const response = NextResponse.next({ request: { headers } });
   response.headers.set("Content-Security-Policy", policy);
-  if (!isPrefetch(request) && !isLocale(request.cookies.get(LOCALE_COOKIE)?.value)) {
+  const hinted = request.headers.get("x-locale");
+  if (!isPrefetch(request) && !isLocale(request.cookies.get(LOCALE_COOKIE)?.value) && !isLocale(hinted)) {
     response.cookies.set(LOCALE_COOKIE, localeFromHeaders(request.headers), cookie);
   }
   return response;

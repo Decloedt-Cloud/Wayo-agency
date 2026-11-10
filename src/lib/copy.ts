@@ -83,6 +83,7 @@ export type Ui = {
   privacyOwner: string;
   siteTitle: string;
   siteDescription: string;
+  notFoundTitle: string;
   notFound: string;
   backHome: string;
 };
@@ -191,7 +192,8 @@ const fr: Ui = {
   privacyOwner: "Responsable",
   siteTitle: "Audit et réparation de code généré par IA | Wayo Agency",
   siteDescription: "Votre app créée avec Cursor, Lovable ou Bolt bug ou inquiète ? Wayo Agency audite, sécurise et met votre code IA en production, sans tout réécrire.",
-  notFound: "Cette adresse ne correspond à aucune page.",
+  notFoundTitle: "Cette page n'existe pas.",
+  notFound: "L'adresse demandée ne correspond à aucune page.",
   backHome: "Retour à l'accueil",
 };
 
@@ -290,7 +292,8 @@ const en: Ui = {
   privacyOwner: "Owner",
   siteTitle: "Vibe code audit and AI-generated app repair | Wayo",
   siteDescription: "Cursor, Lovable or Bolt app buggy or worrying? Wayo Agency runs a vibe code audit, secures it, and takes it to production without a rewrite.",
-  notFound: "This address does not match a page.",
+  notFoundTitle: "This page does not exist.",
+  notFound: "The address you opened does not match a page.",
   backHome: "Back to the home page",
 };
 
@@ -389,7 +392,8 @@ const ar: Ui = {
   privacyOwner: "المسؤول",
   siteTitle: "Wayo Agency | تدقيق وإصلاح وإطلاق إنتاج للكود المولَّد بالذكاء الاصطناعي",
   siteDescription: "Wayo Agency تدقّق وتصلح وتجهّز للإنتاج التطبيقات المولَّدة بـ Cursor أو Lovable أو Bolt أو Claude Code، دون إعادة كتابتها.",
-  notFound: "هذا العنوان لا يطابق أي صفحة.",
+  notFoundTitle: "هذه الصفحة غير موجودة.",
+  notFound: "العنوان الذي فتحته لا يطابق أي صفحة.",
   backHome: "العودة إلى الصفحة الرئيسية",
 };
 
