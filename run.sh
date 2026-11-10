@@ -8,7 +8,7 @@
 set -e
 
 APP_NAME="wayoagency"
-PROJECT_DIR="/var/www/wayoagency"
+PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 MAINTENANCE_FLAG="/var/www/wayoagency-maintenance.flag"
 MAINTENANCE_DIR="/var/www/wayoagency-maintenance"
 
