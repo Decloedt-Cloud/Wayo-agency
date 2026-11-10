@@ -53,6 +53,10 @@ function canonicalRedirect(request: NextRequest): NextResponse | null {
   return NextResponse.redirect(url, 301);
 }
 
+function isPrefetch(request: NextRequest) {
+  return request.headers.get("next-router-prefetch") === "1" || request.headers.get("purpose") === "prefetch";
+}
+
 export function middleware(request: NextRequest, event: NextFetchEvent) {
   const development = process.env.NODE_ENV !== "production";
   const redirect = canonicalRedirect(request);
@@ -74,7 +78,7 @@ export function middleware(request: NextRequest, event: NextFetchEvent) {
     url.pathname = localePath(requested, path);
     url.searchParams.delete("lang");
     const redirect = NextResponse.redirect(url);
-    redirect.cookies.set(LOCALE_COOKIE, requested, cookie);
+    if (!isPrefetch(request)) redirect.cookies.set(LOCALE_COOKIE, requested, cookie);
     return redirect;
   }
 
@@ -82,7 +86,7 @@ export function middleware(request: NextRequest, event: NextFetchEvent) {
     const url = request.nextUrl.clone();
     url.pathname = path;
     const redirect = NextResponse.redirect(url);
-    redirect.cookies.set(LOCALE_COOKIE, "fr", cookie);
+    if (!isPrefetch(request)) redirect.cookies.set(LOCALE_COOKIE, "fr", cookie);
     return redirect;
   }
 
@@ -93,7 +97,7 @@ export function middleware(request: NextRequest, event: NextFetchEvent) {
     const policy = policyFor(headers, development);
     const response = NextResponse.rewrite(url, { request: { headers } });
     response.headers.set("Content-Security-Policy", policy);
-    response.cookies.set(LOCALE_COOKIE, prefix, cookie);
+    if (!isPrefetch(request)) response.cookies.set(LOCALE_COOKIE, prefix, cookie);
     return response;
   }
 
@@ -101,12 +105,12 @@ export function middleware(request: NextRequest, event: NextFetchEvent) {
   const policy = policyFor(headers, development);
   const response = NextResponse.next({ request: { headers } });
   response.headers.set("Content-Security-Policy", policy);
-  if (!isLocale(request.cookies.get(LOCALE_COOKIE)?.value)) {
+  if (!isPrefetch(request) && !isLocale(request.cookies.get(LOCALE_COOKIE)?.value)) {
     response.cookies.set(LOCALE_COOKIE, localeFromHeaders(request.headers), cookie);
   }
   return response;
 }
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico|logos/).*)"],
+  matcher: ["/((?!_next/static|_next/image|logos/).*)"],
 };

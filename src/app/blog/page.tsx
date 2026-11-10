@@ -1,6 +1,7 @@
 import { readdirSync, readFileSync, existsSync } from "node:fs";
 import path from "node:path";
 import type { Metadata } from "next";
+import { Footer } from "@/components/sections/Footer";
 import { getUi } from "@/lib/copy";
 import { getLocale } from "@/lib/get-locale";
 import { localePath } from "@/lib/locale";
@@ -36,6 +37,7 @@ export default async function BlogPage() {
   const ui = getUi(locale);
   const articles = posts();
   return (
+    <>
     <main id="contenu" className="section">
       <div className="wrap legal">
         <h1 className="serif display">Journal</h1>
@@ -54,5 +56,7 @@ export default async function BlogPage() {
         <p><a className="link" href={localePath(locale, "/")}>{ui.backHome}</a></p>
       </div>
     </main>
+    <Footer ui={ui} locale={locale} />
+    </>
   );
 }

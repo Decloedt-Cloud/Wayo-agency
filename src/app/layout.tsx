@@ -19,16 +19,17 @@ const serif = Instrument_Serif({
 });
 
 const sans = Inter_Tight({
-  weight: ["400", "500", "600"],
+  weight: ["400", "600"],
   subsets: ["latin"],
   display: "swap",
   variable: "--font-sans",
 });
 
 const mono = JetBrains_Mono({
-  weight: ["400", "500"],
+  weight: "400",
   subsets: ["latin"],
   display: "swap",
+  preload: false,
   variable: "--font-mono",
 });
 

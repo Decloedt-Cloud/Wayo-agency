@@ -15,7 +15,7 @@ export function Contact({ settings, ui, locale }: { settings: SettingsRecord; ui
           <div className="reveal grow">
             <p className="mono faint">{ui.call}</p>
             <p className="serif" style={{ fontSize: 36, lineHeight: 1.05, margin: "10px 0 0" }}>{ui.callBody}</p>
-            <a className="btn" href={settings.bookingUrl || "https://tidycal.com/wayoagency"} target="_blank" rel="noopener noreferrer" style={{ marginTop: 22 }}>
+            <a className="btn" href={settings.bookingUrl || "https://tidycal.com/wayo-ads"} target="_blank" rel="noopener noreferrer" style={{ marginTop: 22 }}>
               {ui.bookSlot}
             </a>
             {settings.contactEmail ? (

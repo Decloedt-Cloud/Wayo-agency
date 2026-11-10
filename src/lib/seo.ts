@@ -12,28 +12,22 @@ export const sameAs = [
 
 const keywords: Record<Locale, string[]> = {
   fr: [
-    "audit code généré par IA",
-    "vibe coding",
-    "réparation application Cursor",
-    "Lovable",
-    "Bolt",
-    "Claude Code",
+    "audit de code généré par IA",
+    "réparation d'application vibe coding",
     "mise en production application IA",
-    "sécurité code généré",
-    "dette technique",
-    "Wayo Agency",
+    "vibe coding",
+    "audit code Lovable",
+    "audit code Cursor",
+    "dette technique code IA",
   ],
   en: [
-    "AI generated code audit",
-    "vibe coding",
-    "Cursor app repair",
-    "Lovable",
-    "Bolt",
-    "Claude Code",
-    "production ready AI app",
-    "AI code security",
-    "technical debt",
-    "Wayo Agency",
+    "vibe code audit",
+    "vibe coding rescue",
+    "fix AI-generated code",
+    "production readiness review",
+    "Lovable to production",
+    "secure Lovable app",
+    "technical debt AI code",
   ],
   ar: [
     "تدقيق كود الذكاء الاصطناعي",
@@ -91,8 +85,13 @@ export function buildMetadata(locale: Locale, path: string, override?: { title: 
   const ogLocale = locale === "ar" ? "ar_AR" : locale === "en" ? "en_US" : "fr_FR";
   return {
     metadataBase: new URL(siteOrigin()),
+    applicationName: "Wayo Agency",
     title,
     description,
+    icons: {
+      icon: [{ url: "/logos/wayo.avif", type: "image/avif", sizes: "552x552" }],
+      apple: [{ url: "/logos/wayo.avif", sizes: "552x552" }],
+    },
     keywords: path === "/" ? keywords[locale] : undefined,
     alternates: { canonical, languages: { ...languages } },
     robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 } },
@@ -127,7 +126,12 @@ export function homeJsonLd(locale: Locale, content: PageContent) {
         "@type": "Organization",
         name: "Wayo Agency",
         url: origin,
-        logo: `${origin}/favicon.ico`,
+        logo: {
+          "@type": "ImageObject",
+          url: `${origin}/logos/wayo.avif`,
+          width: 552,
+          height: 552,
+        },
         description: ui.siteDescription,
         ...(email ? { email } : {}),
         sameAs,
@@ -138,6 +142,14 @@ export function homeJsonLd(locale: Locale, content: PageContent) {
         url: origin,
         inLanguage: ["fr", "en", "ar"],
         publisher: { "@type": "Organization", name: "Wayo Agency" },
+      },
+      {
+        "@type": "WebPage",
+        name: ui.siteTitle,
+        description: ui.siteDescription,
+        url,
+        inLanguage: locale,
+        isPartOf: { "@type": "WebSite", name: "Wayo Agency", url: origin },
       },
       {
         "@type": "ProfessionalService",
@@ -153,6 +165,7 @@ export function homeJsonLd(locale: Locale, content: PageContent) {
             "@type": "Offer",
             name: offer.name,
             description: offer.description,
+            url: `${origin}${localePath(locale, `/offres/${offer.slug}`)}`,
           })),
         },
       },
@@ -171,15 +184,28 @@ export function homeJsonLd(locale: Locale, content: PageContent) {
 
 export function serviceJsonLd(locale: Locale, offer: { name: string; description: string; slug: string }) {
   const origin = siteOrigin();
+  const url = `${origin}${localePath(locale, `/offres/${offer.slug}`)}`;
+  const home = `${origin}${localePath(locale, "/")}`;
   return {
     "@context": "https://schema.org",
-    "@type": "Service",
-    name: offer.name,
-    description: offer.description,
-    serviceType: offer.name,
-    url: `${origin}${localePath(locale, `/offres/${offer.slug}`)}`,
-    provider: { "@type": "Organization", name: "Wayo Agency", url: origin },
-    areaServed: "Worldwide",
+    "@graph": [
+      {
+        "@type": "Service",
+        name: offer.name,
+        description: offer.description,
+        serviceType: offer.name,
+        url,
+        provider: { "@type": "Organization", name: "Wayo Agency", url: origin },
+        areaServed: "Worldwide",
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Wayo Agency", item: home },
+          { "@type": "ListItem", position: 2, name: offer.name, item: url },
+        ],
+      },
+    ],
   };
 }
 

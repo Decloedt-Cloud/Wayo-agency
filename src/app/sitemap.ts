@@ -21,8 +21,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     locales.map((locale) => ({
       url: `${origin}${localePath(locale, page)}`,
       lastModified: modified,
-      changeFrequency: page === "/" ? "weekly" as const : "yearly" as const,
-      priority: page === "/" ? 1 : 0.3,
+      changeFrequency: page === "/" ? "weekly" as const : page.startsWith("/offres/") ? "monthly" as const : "yearly" as const,
+      priority: page === "/" ? 1 : page.startsWith("/offres/") ? 0.8 : 0.2,
       alternates: {
         languages: {
           fr: `${origin}${localePath("fr", page)}`,

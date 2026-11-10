@@ -4,24 +4,26 @@ import { useEffect, useRef, useState } from "react";
 import { wrapRail } from "@/lib/rail";
 
 const tools = [
-  { name: "Cursor", kind: "Éditeur", logo: "/logos/cursor.svg", ink: true },
-  { name: "Lovable", kind: "Éditeur", logo: "/logos/lovable.svg" },
-  { name: "Bolt", kind: "Éditeur", logo: "/logos/bolt.svg" },
-  { name: "Claude Code", kind: "Éditeur", logo: "/logos/claude.svg" },
-  { name: "Next.js", kind: "Techno", logo: "/logos/nextdotjs.svg", ink: true },
-  { name: "Supabase", kind: "Techno", logo: "/logos/supabase.svg" },
-  { name: "Firebase", kind: "Techno", logo: "/logos/firebase.svg" },
-  { name: "Stripe", kind: "Techno", logo: "/logos/stripe.svg" },
-  { name: "Flutter", kind: "Techno", logo: "/logos/flutter.svg" },
-  { name: "React Native", kind: "Techno", logo: "/logos/react.svg" },
-  { name: "Vercel", kind: "Techno", logo: "/logos/vercel.svg", ink: true },
-  { name: "Netlify", kind: "Techno", logo: "/logos/netlify.svg" },
-  { name: "AWS", kind: "Techno", logo: "/logos/aws.svg", ink: true },
+  { name: "Cursor", kind: "Éditeur", logo: "/logos/cursor.avif", ink: true },
+  { name: "Lovable", kind: "Éditeur", logo: "/logos/lovable.avif" },
+  { name: "Bolt", kind: "Éditeur", logo: "/logos/bolt.avif" },
+  { name: "Claude Code", kind: "Éditeur", logo: "/logos/claude.avif" },
+  { name: "Next.js", kind: "Techno", logo: "/logos/nextdotjs.avif", ink: true },
+  { name: "Java", kind: "Techno", logo: "/logos/openjdk.avif", ink: true },
+  { name: "Spring Boot", kind: "Techno", logo: "/logos/springboot.avif" },
+  { name: "Supabase", kind: "Techno", logo: "/logos/supabase.avif" },
+  { name: "Firebase", kind: "Techno", logo: "/logos/firebase.avif" },
+  { name: "Stripe", kind: "Techno", logo: "/logos/stripe.avif" },
+  { name: "Flutter", kind: "Techno", logo: "/logos/flutter.avif" },
+  { name: "React Native", kind: "Techno", logo: "/logos/react.avif" },
+  { name: "Hostinger", kind: "VPS", logo: "/logos/hostinger.avif" },
+  { name: "Netlify", kind: "VPS", logo: "/logos/netlify.avif" },
+  { name: "AWS", kind: "VPS", logo: "/logos/aws.avif", ink: true },
 ] as const;
 
 const speed = 42;
 
-export function ToolRail({ labels }: { labels: { stacks: string; pause: string; resume: string; editor: string; tech: string } }) {
+export function ToolRail({ labels }: { labels: { stacks: string; pause: string; resume: string; editor: string; tech: string; vps: string } }) {
   const scroller = useRef<HTMLDivElement>(null);
   const half = useRef<HTMLDivElement>(null);
   const paused = useRef(false);
@@ -131,7 +133,7 @@ export function ToolRail({ labels }: { labels: { stacks: string; pause: string; 
                 <img className={"ink" in item && item.ink ? "tool-logo logo-ink" : "tool-logo"} src={item.logo} alt="" width={28} height={28} draggable={false} decoding="async" loading="lazy" />
                 <span>
                   <span className="tool-name">{item.name}</span>
-                  <span className="mono tool-kind">{item.kind === "Éditeur" ? labels.editor : labels.tech}</span>
+                  <span className="mono tool-kind">{item.kind === "Éditeur" ? labels.editor : item.kind === "VPS" ? labels.vps : labels.tech}</span>
                 </span>
               </span>
             ))}

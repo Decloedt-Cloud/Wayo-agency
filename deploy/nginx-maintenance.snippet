@@ -1,0 +1,38 @@
+# Wayo Agency — coller dans le server {} du site (pas celui de Wayo Ads).
+# Le drapeau est propre à Agency : un déploiement Ads ne coupe pas ce site, et l'inverse.
+#
+#   sudo nginx -t && sudo nginx -s reload
+#   ./run.sh copie ensuite maintenance/ vers /var/www/wayoagency-maintenance/
+
+error_page 503 @maintenance;
+
+location = /favicon.avif {
+    auth_basic off;
+    access_log off;
+    log_not_found off;
+    root /var/www/wayoagency-maintenance;
+    default_type image/avif;
+    try_files /favicon.avif =404;
+}
+
+location @maintenance {
+    root /var/www/wayoagency-maintenance;
+    try_files /index.html =503;
+    add_header Content-Security-Policy "default-src 'self'; font-src 'self' https://fonts.gstatic.com data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'" always;
+    add_header Retry-After 300 always;
+    add_header Cache-Control "no-store, max-age=0" always;
+}
+
+# Avant location /. Pendant le déploiement, ./run.sh crée ce fichier.
+if (-f /var/www/wayoagency-maintenance.flag) {
+    return 503;
+}
+
+location / {
+    proxy_pass http://127.0.0.1:3010;
+    proxy_http_version 1.1;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+}

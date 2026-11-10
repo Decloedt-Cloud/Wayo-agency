@@ -14,6 +14,7 @@ export type Ui = {
   hero1: string;
   hero2: string;
   heroIntro: string;
+  heroKeyword: string;
   statementKicker: string;
   statement: string;
   statementEmphasis: string;
@@ -63,9 +64,11 @@ export type Ui = {
     failed: string;
     offers: Record<"audit" | "rescue" | "hardening" | "maintenance" | "production-ready" | "unknown", string>;
   };
-  rail: { stacks: string; pause: string; resume: string; editor: string; tech: string };
+  rail: { stacks: string; pause: string; resume: string; editor: string; tech: string; vps: string };
   footerLegal: string;
   footerPrivacy: string;
+  footerPages: string;
+  footerContact: string;
   socialLabel: string;
   themeLight: string;
   themeDark: string;
@@ -103,13 +106,14 @@ const fr: Ui = {
   seeOffers: "Voir les offres",
   hero1: "Votre app existe.",
   hero2: "Rendons-la solide.",
-  heroIntro: "Cursor, Lovable, Bolt, Claude Code : l'IA vous a donné un produit. Wayo Agency vérifie le code, corrige les risques critiques et prépare votre application pour la production, sans tout réécrire.",
+  heroIntro: "Cursor, Lovable ou Bolt vous ont livré une application. Wayo Agency en fait l'audit de code généré par IA, corrige les risques critiques et prépare la mise en production, sans tout réécrire.",
+  heroKeyword: "Audit, réparation et mise en production de code généré par IA",
   statementKicker: "Constat",
   statement: "Le vibe coding permet de lancer un produit en quelques jours. Mais quand les bugs arrivent, que la sécurité inquiète et que personne ne comprend plus le code, il faut quelqu'un qui reprenne la main. C'est exactement notre travail.",
   statementEmphasis: "reprenne la main.",
   auditKicker: "L'audit",
-  auditTitleA: "Ce qu'un audit",
-  auditTitleB: "remonte.",
+  auditTitleA: "Audit de code",
+  auditTitleB: "généré par IA.",
   auditBody: "Clés exposées, routes ouvertes, paiements fragiles, aucun test : on lit votre code, on classe les risques par gravité et on corrige les critiques en premier.",
   auditNote: "Exemple type de rapport. Le vôtre est établi à partir de votre propre code.",
   auditOpen: "OUVERT",
@@ -120,12 +124,12 @@ const fr: Ui = {
   methodKicker: "Méthode, du prototype à la production",
   scrollHint: "Défiler",
   scopeKicker: "Périmètre",
-  scopeTitleA: "Tout ce qui peut",
-  scopeTitleB: "casser.",
+  scopeTitleA: "Sécuriser",
+  scopeTitleB: "votre application.",
   scopeQuote: "« J'ai réussi à créer le produit, mais je ne sais plus comment le maintenir. » On prend en charge ce qui se passe après.",
   offersKicker: "Offres",
-  offersTitleA: "Quatre façons de travailler",
-  offersTitleB: "ensemble.",
+  offersTitleA: "Mise en production",
+  offersTitleB: "sans réécrire.",
   price: "Prix",
   delay: "Délai",
   onRequest: "Sur devis",
@@ -153,9 +157,11 @@ const fr: Ui = {
     failed: "L'envoi a échoué. Réessayez.",
     offers: { audit: "Audit", rescue: "Rescue", hardening: "Hardening", maintenance: "Maintenance", "production-ready": "Production Ready", unknown: "Je ne sais pas" },
   },
-  rail: { stacks: "Stacks", pause: "Pause", resume: "Reprendre", editor: "Éditeur", tech: "Techno" },
+  rail: { stacks: "Stacks", pause: "Pause", resume: "Reprendre", editor: "Éditeur", tech: "Techno", vps: "VPS" },
   footerLegal: "Mentions légales",
   footerPrivacy: "Confidentialité",
+  footerPages: "Pages",
+  footerContact: "Contact",
   socialLabel: "Réseaux",
   themeLight: "Clair",
   themeDark: "Sombre",
@@ -183,8 +189,8 @@ const fr: Ui = {
   privacyContact: "Contact",
   privacyContactEmpty: "L'adresse de contact n'est pas encore renseignée.",
   privacyOwner: "Responsable",
-  siteTitle: "Wayo Agency | Audit, réparation et production du code",
-  siteDescription: "Wayo Agency audite, répare et prépare pour la production les applications générées par Cursor, Lovable, Bolt ou Claude Code, sans les réécrire.",
+  siteTitle: "Audit et réparation de code généré par IA | Wayo Agency",
+  siteDescription: "Votre app créée avec Cursor, Lovable ou Bolt bug ou inquiète ? Wayo Agency audite, sécurise et met votre code IA en production, sans tout réécrire.",
   notFound: "Cette adresse ne correspond à aucune page.",
   backHome: "Retour à l'accueil",
 };
@@ -199,13 +205,14 @@ const en: Ui = {
   seeOffers: "See the offers",
   hero1: "Your app exists.",
   hero2: "Let's make it solid.",
-  heroIntro: "Cursor, Lovable, Bolt, Claude Code: AI gave you a product. Wayo Agency checks the code, fixes the critical risks, and prepares your application for production, without rewriting it.",
+  heroIntro: "Cursor, Lovable, or Bolt handed you an application. Wayo Agency runs a vibe code audit, fixes the critical risks, and prepares the production launch, without rewriting it.",
+  heroKeyword: "Audit, repair, and production launch of AI-generated code",
   statementKicker: "The problem",
   statement: "Vibe coding can launch a product in a few days. But when the bugs arrive, security becomes a worry, and nobody understands the code anymore, someone has to take back control. That is exactly our work.",
   statementEmphasis: "take back control.",
   auditKicker: "The audit",
-  auditTitleA: "What an audit",
-  auditTitleB: "finds.",
+  auditTitleA: "AI-generated",
+  auditTitleB: "code audit.",
   auditBody: "Exposed keys, open routes, fragile payments, no tests: we read your code, rank the risks by severity, and fix the critical ones first.",
   auditNote: "Sample report. Yours is based on your own code.",
   auditOpen: "OPEN",
@@ -216,12 +223,12 @@ const en: Ui = {
   methodKicker: "Method, from prototype to production",
   scrollHint: "Scroll",
   scopeKicker: "Scope",
-  scopeTitleA: "Everything that can",
-  scopeTitleB: "break.",
+  scopeTitleA: "Secure",
+  scopeTitleB: "your application.",
   scopeQuote: "“I managed to build the product, but I no longer know how to maintain it.” We take over what happens next.",
   offersKicker: "Offers",
-  offersTitleA: "Four ways to work",
-  offersTitleB: "together.",
+  offersTitleA: "Production",
+  offersTitleB: "without a rewrite.",
   price: "Price",
   delay: "Timeline",
   onRequest: "On request",
@@ -249,9 +256,11 @@ const en: Ui = {
     failed: "Sending failed. Try again.",
     offers: { audit: "Audit", rescue: "Rescue", hardening: "Hardening", maintenance: "Maintenance", "production-ready": "Production Ready", unknown: "I don't know" },
   },
-  rail: { stacks: "Stacks", pause: "Pause", resume: "Resume", editor: "Editor", tech: "Stack" },
+  rail: { stacks: "Stacks", pause: "Pause", resume: "Resume", editor: "Editor", tech: "Stack", vps: "VPS" },
   footerLegal: "Legal notice",
   footerPrivacy: "Privacy",
+  footerPages: "Pages",
+  footerContact: "Contact",
   socialLabel: "Social",
   themeLight: "Light",
   themeDark: "Dark",
@@ -279,8 +288,8 @@ const en: Ui = {
   privacyContact: "Contact",
   privacyContactEmpty: "The contact address has not been provided yet.",
   privacyOwner: "Owner",
-  siteTitle: "Wayo Agency | Audit, repair, and production launch of AI-generated code",
-  siteDescription: "Wayo Agency audits, repairs, and prepares for production the applications generated by Cursor, Lovable, Bolt, or Claude Code, without rewriting them.",
+  siteTitle: "Vibe code audit and AI-generated app repair | Wayo",
+  siteDescription: "Cursor, Lovable or Bolt app buggy or worrying? Wayo Agency runs a vibe code audit, secures it, and takes it to production without a rewrite.",
   notFound: "This address does not match a page.",
   backHome: "Back to the home page",
 };
@@ -295,13 +304,14 @@ const ar: Ui = {
   seeOffers: "شاهد العروض",
   hero1: "تطبيقك موجود.",
   hero2: "لنجعله متيناً.",
-  heroIntro: "Cursor وLovable وBolt وClaude Code: منحكم الذكاء الاصطناعي منتجاً. Wayo Agency تراجع الكود، وتصحّح المخاطر الحرجة، وتجهّز تطبيقكم للإنتاج، دون إعادة كتابته.",
+  heroIntro: "Cursor أو Lovable أو Bolt سلّمكم تطبيقاً. Wayo Agency تدقّق الكود المولَّد بالذكاء الاصطناعي، وتصحّح المخاطر الحرجة، وتجهّزه للإنتاج، دون إعادة كتابته.",
+  heroKeyword: "تدقيق وإصلاح وإطلاق إنتاج للكود المولَّد بالذكاء الاصطناعي",
   statementKicker: "الواقع",
   statement: "بناء المنتج بالذكاء الاصطناعي يتيح إطلاقه في أيام. لكن حين تظهر الأخطاء، ويقلق الأمان، ولا يعود أحد يفهم الكود، يلزم من يستعيد السيطرة. هذا تحديداً عملنا.",
   statementEmphasis: "يستعيد السيطرة.",
   auditKicker: "التدقيق",
-  auditTitleA: "ما يكتشفه",
-  auditTitleB: "التدقيق.",
+  auditTitleA: "تدقيق الكود",
+  auditTitleB: "المولَّد بالذكاء الاصطناعي.",
   auditBody: "مفاتيح مكشوفة، مسارات مفتوحة، مدفوعات هشّة، ولا اختبارات: نقرأ كودكم، ونرتّب المخاطر حسب شدّتها، ونصلح الحرجة أولاً.",
   auditNote: "نموذج تقرير. تقريركم يُبنى من كودكم نفسه.",
   auditOpen: "مفتوح",
@@ -312,12 +322,12 @@ const ar: Ui = {
   methodKicker: "المنهج، من النموذج إلى الإنتاج",
   scrollHint: "مرّر",
   scopeKicker: "النطاق",
-  scopeTitleA: "كل ما يمكن",
-  scopeTitleB: "أن ينكسر.",
+  scopeTitleA: "تأمين",
+  scopeTitleB: "تطبيقكم.",
   scopeQuote: "« نجحت في إنشاء المنتج، لكني لم أعد أعرف كيف أصونه. » نتولّى ما يحدث بعد ذلك.",
   offersKicker: "العروض",
-  offersTitleA: "أربع طرق للعمل",
-  offersTitleB: "معاً.",
+  offersTitleA: "إلى الإنتاج",
+  offersTitleB: "دون إعادة كتابة.",
   price: "السعر",
   delay: "المدة",
   onRequest: "حسب الطلب",
@@ -345,9 +355,11 @@ const ar: Ui = {
     failed: "تعذّر الإرسال. أعيدوا المحاولة.",
     offers: { audit: "Audit", rescue: "Rescue", hardening: "Hardening", maintenance: "Maintenance", "production-ready": "Production Ready", unknown: "لا أعرف" },
   },
-  rail: { stacks: "التقنيات", pause: "إيقاف", resume: "استئناف", editor: "محرّر", tech: "تقنية" },
+  rail: { stacks: "التقنيات", pause: "إيقاف", resume: "استئناف", editor: "محرّر", tech: "تقنية", vps: "VPS" },
   footerLegal: "إشارات قانونية",
   footerPrivacy: "الخصوصية",
+  footerPages: "الصفحات",
+  footerContact: "تواصل",
   socialLabel: "الشبكات",
   themeLight: "فاتح",
   themeDark: "داكن",
@@ -384,17 +396,21 @@ const ar: Ui = {
 const catalogs: Record<"en" | "ar", Catalog> = {
   en: {
     offers: {
-      audit: { shortDescription: "Code, security, architecture, performance.", description: "Audit of the code, security, architecture, performance, and technical debt.", includes: ["duplicates and unused dependencies", "secrets, auth, permissions", "prioritized report and roadmap"] },
-      rescue: { shortDescription: "Repair what is broken or can no longer be deployed.", description: "Repair an application that is buggy or can no longer be deployed.", includes: ["bugs, 500 errors, broken forms", "problems after an update", "return to a stable state"] },
-      hardening: { shortDescription: "Tests, monitoring, CI/CD, production.", description: "Tests, security, monitoring, CI/CD, and production readiness.", includes: ["unit, integration, and E2E tests", "Sentry, logs, alerts", "CI/CD, staging, rollback"] },
-      maintenance: { shortDescription: "Bugs, updates, small changes.", description: "Monthly maintenance, bug fixes, updates, and small changes.", includes: ["fixes", "dependency updates", "small changes"] },
-      "production-ready": { shortDescription: "From an AI-generated prototype to production.", description: "Audit, security, tests, optimization, CI/CD, monitoring, documentation, and a maintenance plan: one path from an AI-generated prototype to an application you control.", includes: [] },
+      audit: { shortDescription: "Code, security, architecture, performance.", description: "Vibe code audit of an AI-generated application: security, architecture, performance, and technical debt, with a prioritized report.", includes: ["duplicates and unused dependencies", "secrets, auth, permissions", "prioritized report and roadmap"] },
+      rescue: { shortDescription: "Repair what is broken or can no longer be deployed.", description: "Fix a buggy AI-generated application: 500 errors, broken forms, and a deploy that no longer starts.", includes: ["bugs, 500 errors, broken forms", "problems after an update", "return to a stable state"] },
+      hardening: { shortDescription: "Tests, monitoring, CI/CD, production.", description: "Production readiness review: automated tests, CI/CD, Sentry monitoring, and the move to production.", includes: ["unit, integration, and E2E tests", "Sentry, logs, alerts", "CI/CD, staging, rollback"] },
+      maintenance: { shortDescription: "Bugs, updates, small changes.", description: "Monthly maintenance for an AI-built SaaS: bug fixes, dependency updates, and small changes.", includes: ["fixes", "dependency updates", "small changes"] },
+      "production-ready": { shortDescription: "From an AI-generated prototype to production.", description: "From a Lovable prototype to production: audit, tests, CI/CD, monitoring, and a maintenance plan, without a rewrite.", includes: [] },
     },
     faq: [
       { question: "Do I have to rewrite my application?", answer: "No. The goal is to keep what exists: we reorganize the architecture gradually and add tests before changing the critical parts." },
-      { question: "Which tools and stacks do you take on?", answer: "Projects built with Cursor, Lovable, Bolt, or Claude Code, with Supabase, Firebase, Stripe, Next.js, Flutter, React Native, and hosting on Vercel, Netlify, AWS, or a VPS." },
+      { question: "Which tools and stacks do you take on?", answer: "Projects built with Cursor, Lovable, Bolt, or Claude Code, with Supabase, Firebase, Stripe, Next.js, Java, Spring Boot, Flutter, React Native, and hosting on Hostinger, Netlify, AWS, or a VPS." },
       { question: "What does the audit include?", answer: "An analysis of the code, security, architecture, performance, and technical debt, with a prioritized report and an action plan." },
       { question: "And after production?", answer: "With Vibe Code Maintenance: bug fixes, dependency updates, and small changes, every month." },
+      { question: "Is a Lovable application secure?", answer: "Not by default. A Lovable app can expose an API key, leave a route open, or widen data access. The audit reads your code and ranks those risks." },
+      { question: "How much does a code audit cost?", answer: "On request. The amount depends on the size of the code and the risks found. No price is shown before we have seen the project." },
+      { question: "What is the difference between an audit and maintenance?", answer: "An audit is one pass: read the code, rank the risks, propose a plan. Maintenance is the monthly follow-up: bugs, dependencies, and small changes." },
+      { question: "How can I tell if my AI-generated code is dangerous?", answer: "Frequent signs are an API key in the frontend, an open admin route, an unverified Stripe webhook, or database access that is too broad. The audit checks this on your code." },
     ],
     steps: [
       { label: "Audit", body: "Reading the code, the architecture, and the dependencies. Finding the technical debt and what already works." },
@@ -415,7 +431,7 @@ const catalogs: Record<"en" | "ar", Catalog> = {
       { name: "Database", detail: "migrations, relations, indexes, slow queries, backups" },
       { name: "Authentication", detail: "Google, Apple, email, password reset, sessions, roles, tokens" },
       { name: "Payments", detail: "Stripe, subscriptions, webhooks, invoices, synchronization" },
-      { name: "Deployment", detail: "Vercel, Netlify, AWS, VPS, Docker, staging, rollback" },
+      { name: "Deployment", detail: "Hostinger, Netlify, AWS, VPS, Docker, staging, rollback" },
       { name: "Tests", detail: "unit, integration, E2E" },
       { name: "Monitoring", detail: "Sentry, logs, alerts" },
       { name: "SEO", detail: "metadata, sitemap, canonical, SSR, non-indexable pages" },
@@ -437,17 +453,21 @@ const catalogs: Record<"en" | "ar", Catalog> = {
   },
   ar: {
     offers: {
-      audit: { shortDescription: "الكود، الأمان، البنية، الأداء.", description: "تدقيق الكود والأمان والبنية والأداء والدين التقني.", includes: ["تكرار وتبعيات غير لازمة", "أسرار، مصادقة، صلاحيات", "تقرير مرتّب وخارطة طريق"] },
-      rescue: { shortDescription: "إصلاح ما تعطّل أو لم يعد قابلاً للنشر.", description: "إصلاح تطبيق فيه أعطال أو لم يعد يمكن نشره.", includes: ["أعطال، أخطاء 500، نماذج مكسورة", "مشاكل بعد التحديث", "العودة إلى حالة مستقرة"] },
-      hardening: { shortDescription: "اختبارات، مراقبة، CI/CD، إنتاج.", description: "اختبارات وأمان ومراقبة وCI/CD وتجهيز للإنتاج.", includes: ["اختبارات وحدة وتكامل وشاملة", "Sentry، سجلات، تنبيهات", "CI/CD، بيئة تجريبية، تراجع"] },
-      maintenance: { shortDescription: "أعطال، تحديثات، تعديلات صغيرة.", description: "صيانة شهرية، إصلاح أعطال، تحديثات وتعديلات صغيرة.", includes: ["إصلاحات", "تحديث التبعيات", "تعديلات صغيرة"] },
-      "production-ready": { shortDescription: "من نموذج مولَّد بالذكاء الاصطناعي إلى الإنتاج.", description: "تدقيق وتأمين واختبارات وتحسين وCI/CD ومراقبة وتوثيق وخطة صيانة: مسار واحد للانتقال من نموذج مولَّد بالذكاء الاصطناعي إلى تطبيق تسيطرون عليه.", includes: [] },
+      audit: { shortDescription: "الكود، الأمان، البنية، الأداء.", description: "تدقيق كود وأمان لتطبيق مولَّد بالذكاء الاصطناعي: البنية، الأداء، والدين التقني، مع تقرير مرتّب.", includes: ["تكرار وتبعيات غير لازمة", "أسرار، مصادقة، صلاحيات", "تقرير مرتّب وخارطة طريق"] },
+      rescue: { shortDescription: "إصلاح ما تعطّل أو لم يعد قابلاً للنشر.", description: "إصلاح تطبيق فيه أعطال: أخطاء 500، نماذج مكسورة، ونشر لم يعد ينطلق.", includes: ["أعطال، أخطاء 500، نماذج مكسورة", "مشاكل بعد التحديث", "العودة إلى حالة مستقرة"] },
+      hardening: { shortDescription: "اختبارات، مراقبة، CI/CD، إنتاج.", description: "تجهيز للإنتاج: اختبارات آلية، CI/CD، مراقبة Sentry، والانتقال إلى الإنتاج.", includes: ["اختبارات وحدة وتكامل وشاملة", "Sentry، سجلات، تنبيهات", "CI/CD، بيئة تجريبية، تراجع"] },
+      maintenance: { shortDescription: "أعطال، تحديثات، تعديلات صغيرة.", description: "صيانة شهرية لتطبيق SaaS: إصلاح الأعطال، تحديث التبعيات، وتعديلات صغيرة.", includes: ["إصلاحات", "تحديث التبعيات", "تعديلات صغيرة"] },
+      "production-ready": { shortDescription: "من نموذج مولَّد بالذكاء الاصطناعي إلى الإنتاج.", description: "من نموذج Lovable إلى الإنتاج: تدقيق، اختبارات، CI/CD، مراقبة، وخطة صيانة، دون إعادة كتابة.", includes: [] },
     },
     faq: [
       { question: "هل يجب أن أعيد كتابة تطبيقي؟", answer: "لا. الهدف هو الإبقاء على الموجود: نعيد تنظيم البنية تدريجياً ونضيف اختبارات قبل تعديل الأجزاء الحرجة." },
-      { question: "ما الأدوات والتقنيات التي تتولّونها؟", answer: "المشاريع المبنية بـ Cursor أو Lovable أو Bolt أو Claude Code، مع Supabase وFirebase وStripe وNext.js وFlutter وReact Native، والاستضافة على Vercel أو Netlify أو AWS أو VPS." },
+      { question: "ما الأدوات والتقنيات التي تتولّونها؟", answer: "المشاريع المبنية بـ Cursor أو Lovable أو Bolt أو Claude Code، مع Supabase وFirebase وStripe وNext.js وJava وSpring Boot وFlutter وReact Native، والاستضافة على Hostinger أو Netlify أو AWS أو VPS." },
       { question: "ماذا يتضمن التدقيق؟", answer: "تحليل للكود والأمان والبنية والأداء والدين التقني، مع تقرير مرتّب وخطة عمل." },
       { question: "وماذا بعد الإنتاج؟", answer: "مع Vibe Code Maintenance: إصلاح الأعطال، وتحديث التبعيات، وتعديلات صغيرة، كل شهر." },
+      { question: "هل تطبيق Lovable آمن؟", answer: "ليس تلقائياً. قد يكشف تطبيق Lovable مفتاح API، أو يترك مساراً مفتوحاً، أو يوسّع الوصول إلى البيانات. التدقيق يقرأ كودكم ويرتّب هذه المخاطر." },
+      { question: "كم يكلّف تدقيق الكود؟", answer: "حسب الطلب. المبلغ يعتمد على حجم الكود والمخاطر الموجودة. لا يُعرض سعر قبل رؤية المشروع." },
+      { question: "ما الفرق بين التدقيق والصيانة؟", answer: "التدقيق مرور واحد: قراءة الكود، ترتيب المخاطر، واقتراح خطة. الصيانة متابعة شهرية: أعطال، تبعيات، وتعديلات صغيرة." },
+      { question: "كيف أعرف إن كان كودي المولَّد بالذكاء الاصطناعي خطيراً؟", answer: "العلامات المتكررة هي مفتاح API في الواجهة، أو مسار إدارة مفتوح، أو webhook Stripe غير موثّق، أو وصول واسع لقاعدة البيانات. التدقيق يتحقق من ذلك في كودكم." },
     ],
     steps: [
       { label: "تدقيق", body: "قراءة الكود والبنية والتبعيات. رصد الدين التقني وما يعمل أصلاً." },
@@ -468,7 +488,7 @@ const catalogs: Record<"en" | "ar", Catalog> = {
       { name: "قاعدة البيانات", detail: "هجرات، علاقات، فهارس، استعلامات بطيئة، نسخ احتياطي" },
       { name: "مصادقة", detail: "Google، Apple، بريد، إعادة كلمة السر، جلسات، أدوار، رموز" },
       { name: "دفع", detail: "Stripe، اشتراكات، webhooks، فواتير، مزامنة" },
-      { name: "نشر", detail: "Vercel، Netlify، AWS، VPS، Docker، تجريب، تراجع" },
+      { name: "نشر", detail: "Hostinger، Netlify، AWS، VPS، Docker، تجريب، تراجع" },
       { name: "اختبارات", detail: "وحدة، تكامل، شاملة" },
       { name: "مراقبة", detail: "Sentry، سجلات، تنبيهات" },
       { name: "SEO", detail: "بيانات وصفية، خريطة موقع، canonical، SSR، صفحات غير مفهرسة" },
@@ -489,6 +509,34 @@ const catalogs: Record<"en" | "ar", Catalog> = {
     ],
   },
 };
+
+const offerTitles: Record<Locale, Record<string, string>> = {
+  fr: {
+    audit: "Audit de code généré par IA | Wayo Agency",
+    rescue: "Réparer une application qui bug | Wayo Agency",
+    hardening: "Mise en production, tests et CI/CD | Wayo Agency",
+    maintenance: "Maintenance applicative mensuelle | Wayo Agency",
+    "production-ready": "Application prête pour la production | Wayo",
+  },
+  en: {
+    audit: "Vibe code audit for AI-generated apps | Wayo",
+    rescue: "Fix a buggy AI-generated application | Wayo",
+    hardening: "Production readiness, CI/CD, and tests | Wayo",
+    maintenance: "Monthly maintenance for an AI-built SaaS | Wayo",
+    "production-ready": "Lovable to production, without a rewrite | Wayo",
+  },
+  ar: {
+    audit: "تدقيق كود مولَّد بالذكاء الاصطناعي | Wayo Agency",
+    rescue: "إصلاح تطبيق فيه أعطال | Wayo Agency",
+    hardening: "تجهيز للإنتاج واختبارات وCI/CD | Wayo Agency",
+    maintenance: "صيانة شهرية لتطبيق SaaS | Wayo Agency",
+    "production-ready": "تطبيق جاهز للإنتاج | Wayo Agency",
+  },
+};
+
+export function offerPageTitle(locale: Locale, slug: string, fallback: string): string {
+  return offerTitles[locale][slug] ?? fallback;
+}
 
 export function getUi(locale: Locale): Ui {
   if (locale === "en") return en;

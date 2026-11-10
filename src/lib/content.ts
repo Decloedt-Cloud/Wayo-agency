@@ -20,7 +20,7 @@ export const seedOffers: SeedOffer[] = [
     shortLabel: "Audit",
     shortDescription: "Code, sécurité, architecture, performance.",
     description:
-      "Audit du code, de la sécurité, de l'architecture, de la performance et de la dette technique.",
+      "Audit de code et de sécurité d'une application générée par IA : architecture, performance et dette technique, avec un rapport priorisé.",
     includes: [
       "doublons et dépendances inutiles",
       "secrets, auth, permissions",
@@ -34,7 +34,7 @@ export const seedOffers: SeedOffer[] = [
     name: "Vibe Code Rescue",
     shortLabel: "Rescue",
     shortDescription: "Réparer ce qui bug ou ne se déploie plus.",
-    description: "Réparer une application qui bug ou qui ne peut plus être déployée.",
+    description: "Réparer une application qui bug : correction des erreurs 500, des formulaires cassés et d'un déploiement qui ne part plus.",
     includes: [
       "bugs, erreurs 500, formulaires cassés",
       "problèmes après mise à jour",
@@ -48,7 +48,7 @@ export const seedOffers: SeedOffer[] = [
     name: "Vibe Code Hardening",
     shortLabel: "Hardening",
     shortDescription: "Tests, monitoring, CI/CD, production.",
-    description: "Tests, sécurité, monitoring, CI/CD et préparation à la production.",
+    description: "Mise en production d'une application IA : tests automatisés, CI/CD, monitoring Sentry et passage en production.",
     includes: [
       "tests unitaires, intégration, E2E",
       "Sentry, logs, alertes",
@@ -62,7 +62,7 @@ export const seedOffers: SeedOffer[] = [
     name: "Vibe Code Maintenance",
     shortLabel: "Maintenance",
     shortDescription: "Bugs, mises à jour, petites évolutions.",
-    description: "Maintenance mensuelle, correction de bugs, mises à jour et petites évolutions.",
+    description: "Maintenance applicative mensuelle : correction de bugs, mise à jour des dépendances et petites évolutions.",
     includes: ["corrections", "mises à jour des dépendances", "petites évolutions"],
     isFlagship: false,
   },
@@ -73,7 +73,7 @@ export const seedOffers: SeedOffer[] = [
     shortLabel: "Production Ready",
     shortDescription: "Du prototype généré par IA à la production.",
     description:
-      "Audit, sécurisation, tests, optimisation, CI/CD, monitoring, documentation et plan de maintenance : un seul parcours pour passer d'un prototype généré par IA à une application que vous maîtrisez.",
+      "Parcours pour rendre une application prête pour la production : audit, tests, CI/CD, monitoring et plan de maintenance, sans la réécrire.",
     includes: [],
     isFlagship: true,
   },
@@ -90,7 +90,7 @@ export const seedFaq = [
     position: 2,
     question: "Quels outils et stacks prenez-vous en charge ?",
     answer:
-      "Les projets créés avec Cursor, Lovable, Bolt ou Claude Code, avec Supabase, Firebase, Stripe, Next.js, Flutter, React Native et les hébergements Vercel, Netlify, AWS ou VPS.",
+      "Les projets créés avec Cursor, Lovable, Bolt ou Claude Code, avec Supabase, Firebase, Stripe, Next.js, Java, Spring Boot, Flutter, React Native et les hébergements Hostinger, Netlify, AWS ou VPS.",
   },
   {
     position: 3,
@@ -103,6 +103,30 @@ export const seedFaq = [
     question: "Et après la mise en production ?",
     answer:
       "Avec Vibe Code Maintenance : corrections de bugs, mises à jour des dépendances et petites évolutions, chaque mois.",
+  },
+  {
+    position: 5,
+    question: "Une application Lovable est-elle sécurisée ?",
+    answer:
+      "Pas par défaut. Une application Lovable peut exposer une clé API, laisser une route ouverte ou élargir trop les accès aux données. L'audit lit votre code et classe ces risques.",
+  },
+  {
+    position: 6,
+    question: "Combien coûte un audit de code ?",
+    answer:
+      "Sur devis. Le montant dépend de la taille du code et des risques trouvés. Aucun prix n'est affiché avant d'avoir vu le projet.",
+  },
+  {
+    position: 7,
+    question: "Quelle est la différence entre un audit et une maintenance ?",
+    answer:
+      "L'audit est un passage : lire le code, classer les risques, proposer un plan. La maintenance est le suivi mensuel : bugs, dépendances et petites évolutions.",
+  },
+  {
+    position: 8,
+    question: "Comment savoir si mon code généré par IA est dangereux ?",
+    answer:
+      "Les signes fréquents sont une clé API dans le frontend, une route d'administration ouverte, un webhook Stripe non vérifié, ou des accès base trop larges. L'audit le vérifie sur votre code.",
   },
 ];
 
@@ -158,7 +182,7 @@ export const seedDomains = [
   { position: 6, name: "Base de données", detail: "migrations, relations, index, requêtes lentes, sauvegardes" },
   { position: 7, name: "Authentification", detail: "Google, Apple, email, reset password, sessions, rôles, tokens" },
   { position: 8, name: "Paiement", detail: "Stripe, abonnements, webhooks, factures, synchronisation" },
-  { position: 9, name: "Déploiement", detail: "Vercel, Netlify, AWS, VPS, Docker, staging, rollback" },
+  { position: 9, name: "Déploiement", detail: "Hostinger, Netlify, AWS, VPS, Docker, staging, rollback" },
   { position: 10, name: "Tests", detail: "unitaires, intégration, E2E" },
   { position: 11, name: "Monitoring", detail: "Sentry, logs, alertes" },
   { position: 12, name: "SEO", detail: "metadata, sitemap, canonical, SSR, pages non indexables" },

@@ -34,6 +34,7 @@ export function HeroCanvas({ labels = LABELS }: { labels?: readonly [string, str
     let bugs: number[] = [];
     let grid = 10;
     let raf = 0;
+    let bandHeight = 0;
     let visible = true;
     let hidden = document.hidden;
     const mouse = { x: 0, y: 0, sx: 0, sy: 0 };
@@ -46,6 +47,7 @@ export function HeroCanvas({ labels = LABELS }: { labels?: readonly [string, str
       canvas.width = Math.max(1, Math.round(width * dpr));
       canvas.height = Math.max(1, Math.round(height * dpr));
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      bandHeight = canvas.parentElement?.querySelector(".hero-band")?.getBoundingClientRect().height ?? 0;
       const next = width < 820 ? 6 : 10;
       if (next !== grid || points.length === 0) {
         grid = next;
@@ -68,7 +70,7 @@ export function HeroCanvas({ labels = LABELS }: { labels?: readonly [string, str
       const sinX = Math.sin(rotX);
       const scale = Math.min(width, height * 1.25) * 0.042;
       const narrow = width < 820;
-      const band = canvas.parentElement?.querySelector(".hero-band")?.getBoundingClientRect().height ?? 0;
+      const band = bandHeight;
       const originX = narrow ? width * 0.5 : width * 0.68;
       const originY = narrow ? height - band - 150 : height * 0.46;
       const projected: { x: number; y: number; k: number }[] = [];

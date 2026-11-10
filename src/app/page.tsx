@@ -37,7 +37,7 @@ export default async function HomePage() {
         <ToolRail labels={ui.rail} />
         <Statement text={ui.statement} kicker={ui.statementKicker} emphasis={ui.statementEmphasis} />
         <AuditReport rows={content.auditRows} ui={ui} />
-        <Method steps={content.steps} kicker={ui.methodKicker} scrollHint={ui.scrollHint} />
+        <Method steps={content.steps} kicker={ui.methodKicker} pause={ui.rail.pause} resume={ui.rail.resume} />
         <Domains domains={content.domains} ui={ui} />
         <Band />
         <Offers offers={content.offers} ui={ui} locale={locale} />
@@ -45,7 +45,7 @@ export default async function HomePage() {
         <Faq items={content.faq} ui={ui} />
         <Contact settings={content.settings} ui={ui} locale={locale} />
       </main>
-      <Footer ui={ui} locale={locale} />
+      <Footer ui={ui} locale={locale} bookingUrl={content.settings.bookingUrl} />
       <ScrollVars />
       <RevealOnView />
       <CursorRing />

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/sections/Footer";
-import { getUi, localizeContent } from "@/lib/copy";
+import { getUi, localizeContent, offerPageTitle } from "@/lib/copy";
 import { getLocale } from "@/lib/get-locale";
 import { localePath } from "@/lib/locale";
 import { loadContent } from "@/lib/load-content";
@@ -22,14 +22,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!offer) return {};
   const description = offer.description.replace(/\s+/g, " ").trim().slice(0, 160);
   return buildMetadata(locale, `/offres/${slug}`, {
-    title: `${offer.name} | Wayo Agency`.slice(0, 60),
+    title: offerPageTitle(locale, slug, `${offer.name} | Wayo Agency`).slice(0, 60),
     description,
   });
 }
 
 export default async function OfferPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const { locale, offer } = await offerFor(slug);
+  const { locale, content, offer } = await offerFor(slug);
   if (!offer) notFound();
   const ui = getUi(locale);
   return (
@@ -55,7 +55,7 @@ export default async function OfferPage({ params }: { params: Promise<{ slug: st
           <p><a className="link" href={`${localePath(locale, "/")}#faq`}>{ui.faqTitleA} {ui.faqTitleB}</a></p>
         </article>
       </main>
-      <Footer ui={ui} locale={locale} />
+      <Footer ui={ui} locale={locale} bookingUrl={content.settings.bookingUrl} />
     </>
   );
 }

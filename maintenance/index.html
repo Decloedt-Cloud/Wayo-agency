@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="color-scheme" content="dark light">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; font-src 'self' https://fonts.gstatic.com data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'">
+  <title>Maintenance — Wayo Agency</title>
+  <link rel="icon" href="/favicon.avif" type="image/avif" sizes="any">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0a0908;
+      --panel: #0e0c0b;
+      --ink: #f2efe9;
+      --ink-2: #cfc9be;
+      --muted: #a39d92;
+      --accent: #ff5a1f;
+      --line: rgba(242, 239, 233, 0.16);
+    }
+    html[data-theme="light"] {
+      color-scheme: light;
+      --bg: #f3efe6;
+      --panel: #e7e1d6;
+      --ink: #1c1915;
+      --ink-2: #3a342c;
+      --muted: #6d655c;
+      --accent: #e24b12;
+      --line: rgba(28, 25, 21, 0.16);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { min-height: 100%; }
+    body {
+      min-height: 100dvh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Inter Tight", "Noto Naskh Arabic", system-ui, sans-serif;
+      font-size: 18px;
+      line-height: 1.5;
+    }
+    .site-header, .site-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 20px 28px;
+      border-bottom: 1px solid var(--line);
+    }
+    .site-footer { border-bottom: 0; border-top: 1px solid var(--line); }
+    .brand { display: flex; align-items: center; gap: 12px; min-width: 0; color: inherit; text-decoration: none; }
+    .brand img { width: 36px; height: 36px; object-fit: contain; }
+    .brand span { font-family: "Instrument Serif", "Noto Naskh Arabic", serif; font-size: 28px; letter-spacing: -0.03em; white-space: nowrap; }
+    .actions { display: flex; align-items: center; gap: 8px; }
+    button {
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--ink);
+      font: inherit;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      min-height: 44px;
+      min-width: 44px;
+      padding: 0 12px;
+      cursor: pointer;
+    }
+    button[aria-pressed="true"] { color: var(--accent); border-color: var(--accent); }
+    main {
+      min-height: calc(100dvh - 170px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 28px;
+    }
+    article { width: min(100%, 720px); }
+    h1 {
+      font-family: "Instrument Serif", "Noto Naskh Arabic", serif;
+      font-size: clamp(48px, 8vw, 84px);
+      font-weight: 400;
+      letter-spacing: -0.04em;
+      line-height: 0.95;
+    }
+    .message { margin-top: 24px; max-width: 540px; color: var(--ink-2); }
+    .apology { margin-top: 12px; color: var(--muted); }
+    .track { margin-top: 36px; height: 2px; background: var(--line); overflow: hidden; position: relative; }
+    .track span {
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 32%;
+      background: var(--accent);
+      animation: slide 1.8s ease-in-out infinite;
+    }
+    @keyframes slide { 0% { transform: translateX(-120%); } 100% { transform: translateX(340%); } }
+    .meta { color: var(--muted); font-size: 14px; text-align: end; }
+    .meta a { color: var(--ink); }
+    @media (max-width: 640px) {
+      .site-header, .site-footer { align-items: flex-start; flex-direction: column; }
+      .meta { text-align: start; }
+    }
+    @media (prefers-reduced-motion: reduce) { .track span { animation: none; width: 100%; } }
+  </style>
+  <meta http-equiv="refresh" content="300">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/">
+      <img id="logo" alt="Wayo Agency" width="96" height="96" src="data:image/avif;base64,AAAAHGZ0eXBhdmlmAAAAAG1pZjFhdmlmbWlhZgAAAXBtZXRhAAAAAAAAACFoZGxyAAAAAAAAAABwaWN0AAAAAAAAAAAAAAAAAAAAAA5waXRtAAAAAAABAAAANGlsb2MAAAAAREAAAgABAAAAAAGUAAEAAAAAAAAOrwACAAAAABBDAAEAAAAAAAAEfwAAADhpaW5mAAAAAAACAAAAFWluZmUCAAAAAAEAAGF2MDEAAAAAFWluZmUCAAAAAAIAAGF2MDEAAAAAr2lwcnAAAACKaXBjbwAAAAxhdjFDgSACAAAAABRpc3BlAAAAAAAAAGAAAABgAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQAcAAAAAA5waXhpAAAAAAEIAAAAOGF1eEMAAAAAdXJuOm1wZWc6bXBlZ0I6Y2ljcDpzeXN0ZW1zOmF1eGlsaWFyeTphbHBoYQAAAAAdaXBtYQAAAAAAAAACAAEDgQIDAAIEhAIFhgAAABppcmVmAAAAAAAAAA5hdXhsAAIAAQABAAATNm1kYXQSAAoJOBmv32UBDQaQMp8dEYAEDEDxAQDX/tLmsP8Di0F4Xo7ZMEsCPOw2wtp5RI1Dee66LnrOa044yTVKm45kwY3iC/gWvHPKJUzK1fqsg3jFPTFeEiCQXjqjALadoadlsIBzaJFBW00LkKo1MBlt/oFOaicrLwruxSW3uQxJjTjMlFNlfp8eAQERpkMEsRNTJ9I/H9voqd/M1EErBIp35gtlU6qd5ZjrDGx0+OetUEiemtEd3J88WU7l3K0yLIat3rizhVq0CMl7/AYbsE63HePdXXmMqcu+xiuSRmHsdPX+Xr7/njJ08qErjyivk/lAn7Xc9EXUb2Z9kvIhrdK2xVj5ds6lv362e5EqAH2+nAgzTKIWye07rFYlXRiSSCeM0k/nINCyXO4bT/fxATt5xpIyu/LKVoVo4lXt6LfyLbuhjuivhJZp7oBj/TqX9gkY1uIlA/sb/pCLz4YviTML2sQIFYZVsv2GV9iDqVn1rJAWLYwesW8mU8STbIxYey3X9H58NFpFtKHzDnAvgVPSnq0Z40u5QCxOfpI4NTtWRxYqEoHVL/AcdvZ1lWBOz2+E9vIE+exUX9BXzXK9HwFp53ybW27Y4MUugo6LlVjvCblJL3Omx0uX8NoQ7gmQ9p0Al9jVhXT0j2K05c8HDbVtHA+r9Qz3UIDP/yMtjIW6lOrSFsL4Ompo9KymLFDh5YFgxaABzFZE7kaGgtM29Gi9f72ixnK8WtKOXZ6DPLu/5V4zdtQvySsbg29uGeAr6gnRmCrOhtRWEB8TFgaU4B1Hkc3/ZNWu51n8RbNQvsBAds9qw40fbEZSYe8bZhbmYgbxFeLBGlyuvHVNXUo90KqpwObNJbfDy1/iBJfJw08U4yRn6kCSetpRY/06ju7M2AWaKEAnqJK7ntgARKmjaa/O3/hefrVQabXgJDTCL3BRc+7bf7PmJf6zKWtbROif1P59FkS81KshsjgBoiZr5qsoA8C847JCHn2oC6rIZKfVkwlRVSwcu9k/1aO/70P8ZjQAcWhBCQ3Dkrh0hklXMYpQmzgLJ79o6e8LewNxm5qYpDhXM0Ly7ctTJ4ekS517VTNzIgC5Cfsur+cKLZVtSdOfZ08cu9kJhESn4YrFayxJk8dzsPTFdlVWaxkWOBoWKE/amOCkklz2DnQCj0eAmdGBd1cbWyDZoNiMffsGuYjEhjul9iT06VuljmAfjwELp4HAoqTibklcQVT8Y8u2j8aPlw4/o8+o9PQi8V4he765JGdXhJ7WoyuECdMxA+2soDx3vrclp3+5gHGmawWZ1FphNOTed/6P67+Eu+uN33Ob+J0pil2ulclbNkt4R/XYG5ndXaMtnn3DnDcKrUPMk0C02KR10gU58XWM3DSV4SD+hRBLhmdZP2xbvNiEcDRrMVL0C/Dabi+cf0pADrion4Rxq3IuaGeXPuGNK1wJ3/ygh4+QKaRuXKO86oGWDvDBjGb+I//qEVTBSOEhc2HZTee2y7SmEy9j3FIpyjWIByff16vFktIFcXMUNTX7ar7LnHHLkDwXxZQpteJgdrXk1IjeYjDpvjiKdmOr4eEx5loqtVDwD5GHHA80ZosNGyY9z+qiV+v9QrDcdrv0MLGjcUfhWfvOZ/3hhWtzB13LkValro3tygINlx20c01LJt++B6mRADoEdT5gPgRp8yGAHt0wEJGYyrJPJ+tjKPX4RQpye3Job4ko/qN/odEpdNuKzm6jM46y5xMjX0Vm1G+116Ux135Qvm2lhNOHd2FzlhwVIn3JBT5ks3B92xB7d1R8NAY7gp1Y4mjbKvp37te9MuBvA7qWipVLRvS/4n7/o1AJQ+xqFcJxYZzV8WtmclMbglXn35s4epE1G2j7NM5+8WZJqi5+1jNEy6ml5lQHxDeTyK8QIsCCokSkCFXcAfvzL+g16a9bnrDGY8KEa5qXNVGck9N8AYnNRXa/o+i1uw/5v6CzivJzqZKGnXJvxUQCoDADTSTQZM03yLxCdhUaebztqtkP2t4nm1QAsDzFK9dVLSnRMSIkxWZOAtWvjs1znLCR45kr+7+IXIL8NV0xZFC4yiu/QTIr+WDuH/P48vlTy/Hz376gAFwT4yygeokv1/PL68iQwImdbU82aFVBVkiGA1NX+M3n+GlJRM8tmhz3LCZF2IjQt7kfxS+o64Yqum1sAYqhzGmnMPLwY93+tVH90L8rGTVskWdopJNbNe6LAynnKPum8/AVrNDqF5eOySAcOSZ+bHBYxzZx1+J8ieex0mzfhGzhowOut/vkQ6o4OkIEBefGOdHhIAicnJxWRUMnEU7ONvoTsMwEOq2g9rJ3oJKZYtRLRJAV6TKoOywphZAOmA6chopu98+DTcw5SfV205hNuFt42MUh7N0fdsZAWSGkfqJD8YxoA9UGz5cnCTsurafOr/oDKraoK/tej1fCpLTjLtoKUcxyUS8Ea4v7JxaKbMkb0Bm20qCgN/5ZSkIStaUQZBYYRDCdcBvW/ceGUmXgwiV/Dz6mz3Fuo7/wAc5j7DPZTcU00Xjas976cpX7hwB3gojAh9y2Xq3dj/ySvQ6RuTXqOYROu7J9x3KeMA4HZoL7GUqxs0mRVz1kZVRyo7z1doUdE7alJ+lEISlWVMDXpPEcoU1eh8urv0+nXeCYx+YtyN3t+ypEPKF6NwTVGbavq7l5P0HAMZgwH/ZK0aPj/oLiF8R5b4VnY6qZWHaQABALLWrvkzP8MpZVwSCTGvECdT9hyF3/e0GTHbgO79GeCOMsti2yYEATsv+yXJX+tlFWb+d+lgGZVos6ovsTN2iDYibe/mRTmX1ySUUrwB9Zv6sQVAKYi99+21YOacX5kddAG4EfJy+nt3JZwYT6jbK/yN5SCuh++qyfnU+c6p5pVUs89uHMaYSx6z53cpEv/Qp5VUJS54SNLxkzG43NZRphI0BUH1zt+RiJi2nMr4iU00DRN6sdP/njPeUjcZEjlnIEQO7KpLjLivrHcZthWDdfLoTpK/bZ/mYNOJU0QWnkfzHywOHOtA92fp7LEQum1H5jSuLR24mJiO32Dn3hUBDV4HvZls7WQlJDHi8oRZiu1/a5moF+2tn1hnHP1vdOUvBMKuViFytkP0okrqcTCXD/b/3s5i8N/8y61iORzk+uqNtqLlciV3rozcXz1Z2ZK9k7c9QZ2w6aGMopgH4f+4NJFP7d1klvAl6eiddXPye6rVuStBs2A2xC2S7bF09qcJbMc5Xsc6QpaYMIhXXnuOIe9NPf+8yXx7F8bmMxqFuNHl7YptLQJrsFyyR28JRgp/WF+OdV8UbURumyd6x8SPjDYPWDU5r+QbVgvP++yzpq41vQn5dTnWPh3hRhw3taNKscX4JeztLplAiVV76DKnc5GbErw8HmOXTWif1QA9HydXk5Zff/Y3SQ4wuLzeY3jVLXomDldYYuAyxhNzdjG+enk0MjgPjLqjcIiu+v4/iRni7iNapCDWIDRE5dtafbk/kJdfyb50jKBOkLxJ9YA8WE1Ya2hAoQFbypHMoYhsWkKBe7PeUHowugzKcWSw+lgflX8zYNDPm0JvU6jNXlGSxzpuRS3wxAB9AvZt9J4vYVJlx5XdXhIgT2rL5GkLeChhjm4FPDfyK7HrmW2UBWteoW/s+otlEGZtvGnV+Z7RFOyVxalMABSgugF384ARH2wU/pogCnF5Okcy8HhVkSMBbbzcn9FlsPfoZfyV20SNwkk3BGQbOgkOD2wbpEyvl56u3uDD7kaYR+48177bjgxNwUTHKcBz997DxFmi+0u45ym0HMRzWngjQ8lUNue0GyoSfbrU0c60fgNAQmRQ1RhdW3RzWfldT/GZJ8PpCpYYm3CZADhndutpTefTxzIbSf/nPT9VqtMZr2rLyHI2AkfQfjUz2yLGR98FACCw1R6Fu+R473+jdFLoh7A1Bym2QE3ZkJZ3XLUOHt0Eol9oaejIEO3XByfdo6Plyd3aU/ZAMGd1PDAj/3xwl/wqjwZ3aSqYImTZNyAYAdjjesC6RnMQyd1pS7yNZ4jMB06eOYNKcpS5qxLrFakGsylzOx658Fqj9cKobTBhP8Iengsz9pf+aw5HDWFT41jNHqD2XXrJNtowlFbULHbeie1nT4j4wmRcQC9OVJhXk4jOCqYMqP/ltuus+hUnWxKb+0AfSQ/yb21YWZU559NVp3U73jdlOGpNnA5y/X70JKbWEMLzVQj3g55t0slaq4Po4jlBU1aXFfTMGbHEh3iP1yEXHyHJQZiiq/9l3cKqkDpA8IbCxnbIXQjIlJGyYABhE4bRB9cJL8fQQDpLQ0LDNvuN1TpN9Fpd8PMnfktI78vzR2hLrGJcwpfwVME+z1IrzUfrKrZbsXj8mWCMXl3SaJud2v71ay4mLgxZiWIsJFnHr+TT8Qqf3sgQfUIq7+uwkMcEUi1ADxULv0MFjxCAORQlA3EiexZ0bJAW2ksKrvNqvX0Ttsxe9HNy7Lu0y16d/cXszPx4f12Zl8gRbFwdF3Rp5Fffl1BbuRXrXIe1V3AbVNjfQlQCOcWyXZxOGYkfqN2fkajZeshQ28AgN8YLi6k13IPHv+a7DbcDaOfcimHINKH8Rdj5Hr/RUh5BBa0LI8ioX84l6foJNwe7eZ+XuVPGIqK140CmLzMiyVe+0t0QPKl2ykYBgwzgfoIXSSojbfabr0ZnbPoY9Na6sYASJdFAnTAGjyPgoX8Q4Qe3DEXLYBgdAqAvMVB49ECnH36a40oY9xlSUmWGTIz5NW6KkAQUIafxohmrFqvFOlJI0kzXXy3ioWOFsuw/3ywViwvW7ZjfaVOx5j93C7HNMmPimqJhc523eoSg5uf+scOsJVFmRQ2QacrsyrxX0jaCunvFr6TzU2fI86vSESB7peYigZwAqRu9yW119DEAzrseRFZUKW1fJuNh/gwuaL/LgaLoeUvJ4TpaEBLsV9p9JfcYPvpfgimewPMEmbvMbuDfF6/EqoCItdFLxh5qtgGB94OIxt6wzJG6zp+B4VgzL9zSj4AOgSAAoGGBmv32VQMvIIEYAMHETYAXoJBX6bkE0d20T5h4gEEqbNs7CHUJ8a5HK6BQ4OJvgFTorLGmKnw61Y4x9jWweRM/dteR/UFdBnxGiQQpCt8mlSvIJmyF+jR5Hz9c9E922fIc9/ScWnpmcRFbvaiuZigBaN0jtfO9CvEC0IxOBYCd8iCKXbECYViZ6K3QqTgXnCSG5KZB54MHwJHjOFuuvH6ZB0igXg32POoQMZikYWlPSZxLj4DqCzHdxD/XDpo784szj2ZW5BmW7ORV2XyyjfVJhcqgQ+Ob8ozPcv1gA/nvJ/HvBMrS31BLNA1KCWGmN1jpmBXBhEGQ2U1w00a8ala9S/uN1tFSlSzGnDwSyJ2cNM6492qyJv/Oqm/pfMkPZEhgZXlZLyVEO41KDiJfgHtciXv1nnqoUxDSSYgpL3Nuu/169erOCvBUpWiSWRyafOMRVYyq76U2+olnwYp85HUElNbDIHkkZIi3A0BLesyQIYAfjl6qr3DSgzuvu7SbW30IYtwc1C39kUIN5SNRKprGGXfNV36s8ltJPkGpqtyPbucm1p43czxUTUIXRl3g/q7wf6OCZKz+Ap1b/QnTAuuI60FGUsolg1NeFTJ2KeosqXtMVy3rKGr/C0wUsPBEBRsAc35tyWAtOuMg3IGu6/P4NyW5x9PuIUfwW+zbTyZKb0kKB5gidLB3V6+uVXhOmcELp5pXjz1mrZBSxr2RT0zckCDYmctd/a4f9alJUce1JNKW/IxIWIwopCFueNI9/5gqd6QFaNN1t1sUIYaz0l3tADuafeCicau1Jb+YnZFC9zWGc3F5jKEwEQkcYcWMfES4s9Rhi5G3GVU3hrdfJy7PqUaFMfgR7rGUcFwCkXE/j+rB9yt1QUCZyAMbbIaw9OteX1hxjlDrTNUvbVhzEphS8axI4XmvQpBsckaDrzoqhvWy6VHMNG3HAQYd2015zMeiLtgsGQ/6JabLigV97345WhU3jYUOg2BUVSYaXyr0+9MTZyz6iVUlcaeY3cw14n0n1gPm0/ZAys/tm1uke/kmoVPf5BpOcnfqMWlfo7vVuPvmBscYXPKVlysMBT+9+foxX/q/rFisHSXe55BPY98eZJ18HGjzudkLfNExq9OdeaVcELl7NBAYbUojIRLzOx4pk9Br0MtKfEhXRvlKXnyoErIMA181eF3ItBleLx74/FcnPq8PF6Owdbtbwjm52VdD3/vN/SPDMjO6BDSigILXXu9KUvLoQS4swDqkryl/x/osMJFbfYhoZyVKUWDVQJsVEh1avEYyVxFx3Pyz0IhkteBp6ZcF0XYM6fMV5HgYTuyzm0w1a4dfKNknjceWAfKG72RLJCogHs1RoFe5TG4fHmwZo5ejnoHbemL7GcgTnMNln/M8/Bmmo6Xc7bMW3CJfuSMTsPO2vxMQIKv84YLCDKVHBF7t0d5nI9s0wWWSs3IKI+vrcpd/dhUs/K/VGb4I3aiP0iAOUT389GtK+nsagMhuzU9b400DsYEBUVeFD9boA+a5femXDoGA==">
+      <span id="brand-name">Wayo Agency</span>
+    </a>
+    <div class="actions">
+      <button type="button" id="theme" aria-pressed="false">Clair</button>
+      <nav aria-label="Langue">
+        <button type="button" class="lang" data-lang="fr" aria-pressed="true">FR</button>
+        <button type="button" class="lang" data-lang="en" aria-pressed="false">EN</button>
+        <button type="button" class="lang" data-lang="ar" aria-pressed="false">AR</button>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <article>
+      <h1 id="title">Maintenance</h1>
+      <p class="message" id="desc">Wayo Agency met le site à jour. Il revient dans quelques minutes.</p>
+      <p class="apology" id="apology">Merci de patienter.</p>
+      <div class="track" aria-hidden="true"><span></span></div>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <p id="copyright">© Wayo Agency</p>
+    <p class="meta"><a href="mailto:support@wayo.cloud">support@wayo.cloud</a></p>
+  </footer>
+  <script>
+    (function () {
+      var year = new Date().getFullYear();
+      var T = {
+        fr: { title: "Maintenance", desc: "Wayo Agency met le site à jour. Il revient dans quelques minutes.", apology: "Merci de patienter.", theme: "Clair", themeOn: "Sombre", page: "Maintenance — Wayo Agency" },
+        en: { title: "Maintenance", desc: "Wayo Agency is updating the site. It will be back in a few minutes.", apology: "Thank you for waiting.", theme: "Light", themeOn: "Dark", page: "Maintenance — Wayo Agency" },
+        ar: { title: "صيانة", desc: "Wayo Agency تحدّث الموقع. سيعود خلال دقائق.", apology: "شكراً لصبركم.", theme: "فاتح", themeOn: "داكن", page: "صيانة — Wayo Agency" }
+      };
+      function cookie(name) {
+        var m = document.cookie.match(new RegExp("(?:^|; )" + name + "=([^;]*)"));
+        return m ? decodeURIComponent(m[1]) : "";
+      }
+      function writeCookie(name, value) {
+        document.cookie = name + "=" + value + "; Path=/; Max-Age=31536000; SameSite=Lax";
+      }
+      function themeLabel(lang, light) {
+        var copy = T[lang] || T.fr;
+        return light ? copy.themeOn : copy.theme;
+      }
+      function setTheme(value) {
+        var light = value === "light";
+        if (light) document.documentElement.setAttribute("data-theme", "light");
+        else document.documentElement.removeAttribute("data-theme");
+        writeCookie("theme", light ? "light" : "dark");
+        var lang = document.documentElement.lang || "fr";
+        var button = document.getElementById("theme");
+        button.textContent = themeLabel(lang, light);
+        button.setAttribute("aria-pressed", light ? "true" : "false");
+      }
+      function setLang(lang) {
+        if (!T[lang]) lang = "fr";
+        var copy = T[lang];
+        var rtl = lang === "ar";
+        document.documentElement.lang = lang;
+        document.documentElement.dir = rtl ? "rtl" : "ltr";
+        document.getElementById("title").textContent = copy.title;
+        document.getElementById("desc").textContent = copy.desc;
+        document.getElementById("apology").textContent = copy.apology;
+        document.title = copy.page;
+        document.getElementById("copyright").textContent = "© " + year + " Wayo Agency";
+        var light = document.documentElement.getAttribute("data-theme") === "light";
+        document.getElementById("theme").textContent = themeLabel(lang, light);
+        document.querySelectorAll(".lang").forEach(function (button) {
+          var on = button.getAttribute("data-lang") === lang;
+          button.setAttribute("aria-pressed", on ? "true" : "false");
+        });
+        writeCookie("locale", lang);
+      }
+      var savedTheme = cookie("theme");
+      setTheme(savedTheme === "light" ? "light" : "dark");
+      var savedLang = cookie("locale");
+      setLang(savedLang === "en" || savedLang === "ar" ? savedLang : "fr");
+      document.getElementById("theme").addEventListener("click", function () {
+        setTheme(document.documentElement.getAttribute("data-theme") === "light" ? "dark" : "light");
+      });
+      document.querySelectorAll(".lang").forEach(function (button) {
+        button.addEventListener("click", function () { setLang(button.getAttribute("data-lang")); });
+      });
+      setTimeout(function () { location.reload(); }, 300000);
+    })();
+  </script>
+</body>
+</html>

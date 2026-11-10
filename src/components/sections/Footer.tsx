@@ -19,14 +19,54 @@ const socials = [
   },
 ] as const;
 
-export function Footer({ ui, locale }: { ui: Ui; locale: Locale }) {
+const offerLinks = ["audit", "rescue", "hardening", "maintenance"] as const;
+
+export function Footer({
+  ui,
+  locale,
+  bookingUrl,
+}: {
+  ui: Ui;
+  locale: Locale;
+  bookingUrl?: string | null;
+}) {
+  const home = localePath(locale, "/");
+  const pages = [
+    { href: `${home}#constat`, label: ui.nav.constat },
+    { href: `${home}#methode`, label: ui.nav.method },
+    { href: `${home}#offres`, label: ui.nav.offers },
+    { href: `${home}#faq`, label: ui.nav.faq },
+    { href: `${home}#contact`, label: ui.footerContact },
+  ];
+
   return (
     <footer className="footer">
-      <div className="wrap mono faint" style={{ display: "flex", flexWrap: "wrap", gap: 16, justifyContent: "space-between", alignItems: "center", paddingTop: 28, paddingBottom: 8 }}>
-        <span>Audit · Rescue · Hardening · Maintenance</span>
-        <nav className="social" aria-label={ui.socialLabel}>
+      <div className="wrap footer-top">
+        <div>
+          <a className="footer-brand serif" href={home}>Wayo Agency</a>
+          <p className="footer-line">Audit · Rescue · Hardening · Maintenance</p>
+        </div>
+        <a className="btn" href={bookingUrl || "https://tidycal.com/wayo-ads"} target="_blank" rel="noopener noreferrer">
+          {ui.bookSlot}
+        </a>
+      </div>
+      <div className="wrap footer-grid">
+        <nav className="footer-col" aria-label={ui.navLabel}>
+          <p className="mono kicker"><span>01</span> {ui.footerPages}</p>
+          {pages.map((item) => (
+            <a key={item.href} href={item.href}>{item.label}</a>
+          ))}
+        </nav>
+        <nav className="footer-col" aria-label={ui.nav.offers}>
+          <p className="mono kicker"><span>02</span> {ui.nav.offers}</p>
+          {offerLinks.map((slug) => (
+            <a key={slug} href={localePath(locale, `/offres/${slug}`)}>{ui.form.offers[slug]}</a>
+          ))}
+        </nav>
+        <nav className="footer-col" aria-label={ui.socialLabel}>
+          <p className="mono kicker"><span>03</span> {ui.socialLabel}</p>
           {socials.map((item) => (
-            <a key={item.name} href={item.href} target="_blank" rel="noopener noreferrer" aria-label={item.name}>
+            <a key={item.name} className="social-link" href={item.href} target="_blank" rel="noopener noreferrer">
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 {item.name === "Instagram" ? (
                   <>
@@ -44,16 +84,18 @@ export function Footer({ ui, locale }: { ui: Ui; locale: Locale }) {
                   <path fill={item.name === "LinkedIn" ? "#0A66C2" : "#0866FF"} d={item.path} />
                 )}
               </svg>
+              {item.name}
             </a>
           ))}
         </nav>
+      </div>
+      <div className="wrap footer-meta mono faint">
         <span>© 2026 Wayo Agency</span>
-        <span style={{ display: "flex", gap: 18 }}>
+        <span className="footer-legal">
           <a className="link" href={localePath(locale, "/mentions-legales")}>{ui.footerLegal}</a>
           <a className="link" href={localePath(locale, "/confidentialite")}>{ui.footerPrivacy}</a>
         </span>
       </div>
-      <p className="serif giant" aria-hidden="true">Wayo</p>
     </footer>
   );
 }

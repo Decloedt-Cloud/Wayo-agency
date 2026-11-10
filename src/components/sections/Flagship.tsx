@@ -12,7 +12,7 @@ export function Flagship({ offer, ui }: { offer: OfferRecord; ui: Ui }) {
           <span style={{ fontStyle: "italic" }}>→ Production Ready</span>
         </h2>
         <div className="cols reveal" style={{ marginTop: 40, alignItems: "flex-end" }}>
-          <p style={{ margin: 0, maxWidth: 680, fontWeight: 500 }}>{offer.description}</p>
+          <p style={{ margin: 0, maxWidth: 680, fontWeight: 600 }}>{offer.description}</p>
           <div>
             <p className="mono" style={{ letterSpacing: "0.06em", textTransform: "none" }}>
               {ui.price} : {offer.priceLabel?.trim() || ui.onRequest}

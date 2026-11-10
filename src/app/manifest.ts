@@ -10,5 +10,6 @@ export default function manifest(): MetadataRoute.Manifest {
     background_color: "#0a0908",
     theme_color: "#0a0908",
     lang: "fr",
+    icons: [{ src: "/logos/wayo.avif", sizes: "552x552", type: "image/avif", purpose: "any" }],
   };
 }
