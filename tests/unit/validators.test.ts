@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { emailDomainAcceptsMail, emailLooksValid } from "@/lib/email-address";
 import { submittedTooFast, validateLead } from "@/lib/validators";
 
 const valid = {
@@ -25,6 +26,14 @@ describe("validateLead", () => {
       expect(result.errors.email).toBeTruthy();
       expect(result.errors.message).toBeTruthy();
     }
+  });
+
+  it("vérifie le format de l'email saisi", async () => {
+    expect(emailLooksValid("ada@example.com")).toBe(true);
+    expect(emailLooksValid("jean.dupont+tag@gmail.com")).toBe(true);
+    expect(emailLooksValid("pas-un-email")).toBe(false);
+    expect(emailLooksValid("ada@localhost")).toBe(false);
+    expect(await emailDomainAcceptsMail("ada@example.com")).toBe(true);
   });
 
   it("exige le consentement", () => {

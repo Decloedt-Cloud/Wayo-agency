@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { emailLooksValid } from "@/lib/email-address";
 import { formErrors } from "@/lib/form-messages";
 import type { Locale } from "@/lib/locale";
 
@@ -41,7 +42,7 @@ function schemaFor(locale: Locale) {
   const copy = formErrors[locale];
   return leadSchema.extend({
     name: z.string().trim().min(2, copy.name).max(120, copy.name),
-    email: z.string().trim().email(copy.email).max(254, copy.email),
+    email: z.string().trim().email(copy.email).max(254, copy.email).refine(emailLooksValid, copy.email),
     offer: z.enum(offerSlugs, { message: copy.offer }),
     stack: z.string().trim().max(200, copy.stack).optional().or(z.literal("")),
     message: z.string().trim().min(10, copy.message).max(4000, copy.message),

@@ -6,6 +6,8 @@ import { LEAD_LIMIT, LEAD_WINDOW_MS, consumeRateLimit } from "@/lib/rate-limit";
 import { leads, siteSettings } from "@/lib/schema";
 import { isAllowedOrigin } from "@/lib/site";
 import { isLocale } from "@/lib/locale";
+import { emailDomainAcceptsMail } from "@/lib/email-address";
+import { formErrors } from "@/lib/form-messages";
 import { emptyToNull, submittedTooFast, validateLead } from "@/lib/validators";
 
 const MAX_BYTES = 10 * 1024;
@@ -68,6 +70,10 @@ export async function POST(request: Request) {
         { ok: false },
         { status: 429, headers: { "Retry-After": String(limit.retryAfter) } },
       );
+    }
+
+    if (!(await emailDomainAcceptsMail(parsed.data.email))) {
+      return NextResponse.json({ errors: { email: formErrors[locale].email } }, { status: 400 });
     }
 
     const db = getDb();
