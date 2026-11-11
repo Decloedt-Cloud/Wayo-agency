@@ -2,7 +2,7 @@ import { NextResponse, type NextFetchEvent, type NextRequest } from "next/server
 import NextAuth from "next-auth";
 import { authConfig } from "@/lib/auth.config";
 import { contentSecurityPolicy } from "@/lib/csp";
-import { isLocale, localeFromHeaders, localePath, LOCALE_COOKIE, splitLocalePrefix } from "@/lib/locale";
+import { isLocale, localePath, LOCALE_COOKIE, splitLocalePrefix } from "@/lib/locale";
 
 const handleAuth = NextAuth(authConfig).auth as unknown as (
   request: NextRequest,
@@ -85,7 +85,9 @@ function isPrefetch(request: NextRequest) {
   return request.headers.get("next-router-prefetch") === "1" || request.headers.get("purpose") === "prefetch";
 }
 
-export function middleware(request: NextRequest, event: NextFetchEvent) {
+const crawler = /googlebot|bingbot|duckduckbot|applebot|slurp|yandex|baiduspider|facebookexternalhit|twitterbot|linkedinbot/i;
+
+export function proxy(request: NextRequest, event: NextFetchEvent) {
   const development = process.env.NODE_ENV !== "production";
   const redirect = canonicalRedirect(request);
   if (redirect) return redirect;
@@ -134,14 +136,37 @@ export function middleware(request: NextRequest, event: NextFetchEvent) {
     return response;
   }
 
+  if (request.nextUrl.pathname.startsWith("/api/") || /\.[a-z0-9]+$/i.test(request.nextUrl.pathname)) {
+    const headers = withPath(request, path);
+    const policy = policyFor(headers, development);
+    const response = NextResponse.next({ request: { headers } });
+    response.headers.set("Content-Security-Policy", policy);
+    return response;
+  }
+
+  const hinted = request.headers.get("x-locale");
+  if (isLocale(hinted)) {
+    const headers = withPath(request, path, hinted);
+    const policy = policyFor(headers, development);
+    const response = NextResponse.next({ request: { headers } });
+    response.headers.set("Content-Security-Policy", policy);
+    return response;
+  }
+
+  const saved = request.cookies.get(LOCALE_COOKIE)?.value;
+  const bot = crawler.test(request.headers.get("user-agent") ?? "");
+  if (!bot && saved !== "fr") {
+    const locale = saved === "ar" ? "ar" : "en";
+    const url = redirectTarget(request, localePath(locale, path));
+    const redirect = NextResponse.redirect(url);
+    if (!isPrefetch(request) && !isLocale(saved)) redirect.cookies.set(LOCALE_COOKIE, "en", cookie);
+    return redirect;
+  }
+
   const headers = withPath(request, path);
   const policy = policyFor(headers, development);
   const response = NextResponse.next({ request: { headers } });
   response.headers.set("Content-Security-Policy", policy);
-  const hinted = request.headers.get("x-locale");
-  if (!isPrefetch(request) && !isLocale(request.cookies.get(LOCALE_COOKIE)?.value) && !isLocale(hinted)) {
-    response.cookies.set(LOCALE_COOKIE, localeFromHeaders(request.headers), cookie);
-  }
   return response;
 }
 

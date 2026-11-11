@@ -1,7 +1,7 @@
 "use server";
 
 import { and, eq, sql } from "drizzle-orm";
-import { revalidateTag } from "next/cache";
+import { updateTag } from "next/cache";
 import { AuthError } from "next-auth";
 import { redirect } from "next/navigation";
 import { requireAdmin, touchSettings, writeAudit } from "@/lib/audit";
@@ -83,7 +83,7 @@ export async function updateOffer(formData: FormData) {
     })
     .where(eq(offers.id, id));
   await writeAudit(email, "update", "offer", id);
-  revalidateTag("content");
+  updateTag("content");
 }
 
 export async function createFaq(formData: FormData) {
@@ -98,7 +98,7 @@ export async function createFaq(formData: FormData) {
     .values({ position: Number(max?.value ?? 0) + 1, question, answer, published: true })
     .returning({ id: faqItems.id });
   await writeAudit(email, "create", "faq", created?.id);
-  revalidateTag("content");
+  updateTag("content");
 }
 
 export async function toggleFaq(formData: FormData) {
@@ -107,7 +107,7 @@ export async function toggleFaq(formData: FormData) {
   const published = formData.get("published") === "true";
   await getDb().update(faqItems).set({ published: !published }).where(eq(faqItems.id, id));
   await writeAudit(email, "publish", "faq", id);
-  revalidateTag("content");
+  updateTag("content");
 }
 
 export async function moveFaq(formData: FormData) {
@@ -125,7 +125,7 @@ export async function moveFaq(formData: FormData) {
     await tx.update(faqItems).set({ position: neighbor.position }).where(and(eq(faqItems.id, current.id)));
   });
   await writeAudit(email, "reorder", "faq", id);
-  revalidateTag("content");
+  updateTag("content");
 }
 
 export async function updateSettings(formData: FormData) {
@@ -143,5 +143,5 @@ export async function updateSettings(formData: FormData) {
     .where(eq(siteSettings.id, true));
   await touchSettings();
   await writeAudit(email, "update", "settings", "1");
-  revalidateTag("content");
+  updateTag("content");
 }

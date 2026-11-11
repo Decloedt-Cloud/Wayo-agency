@@ -5,6 +5,8 @@ import { Instrument_Serif, Inter_Tight, JetBrains_Mono, Noto_Naskh_Arabic, Noto_
 import Script from "next/script";
 import { LiveStatus } from "@/components/client/LiveStatus";
 import { QuietLinks } from "@/components/client/QuietLinks";
+import { SideRail } from "@/components/client/SideRail";
+import { ToTop } from "@/components/client/ToTop";
 import { getUi } from "@/lib/copy";
 import { getLocale, getPathname } from "@/lib/get-locale";
 import { getTheme } from "@/lib/get-theme";
@@ -82,6 +84,8 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         </Script>
         <QuietLinks />
         <LiveStatus />
+        <SideRail locale={locale} label={ui.navLabel} items={ui.nav} />
+        <ToTop />
         <a className="skip" href="#contenu">{ui.skip}</a>
         {children}
       </body>

@@ -415,6 +415,112 @@ html[data-theme="light"] .logo-ink { filter: brightness(0); }
 }
 .footer-legal { display: flex; flex-wrap: wrap; gap: 8px 22px; }
 
+.side-rail {
+  position: fixed;
+  z-index: 45;
+  inset-inline-start: 18px;
+  top: 50%;
+  translate: 0 -50%;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 52px;
+  padding: 8px;
+  background: #141311;
+  color: #f2efe9;
+  border: 1px solid rgba(242, 239, 233, 0.14);
+  border-radius: 26px;
+  transition: width 0.16s cubic-bezier(0.16, 1, 0.3, 1), border-radius 0.16s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.side-rail:hover,
+.side-rail[data-open="true"] {
+  width: 228px;
+  border-radius: 16px;
+}
+.side-rail a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  height: 36px;
+  padding: 0 8px;
+  border-radius: 10px;
+  color: inherit;
+  text-decoration: none;
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+  overflow: hidden;
+}
+.side-rail a[aria-current="page"] { background: rgba(242, 239, 233, 0.1); }
+.side-rail .side-dot,
+.side-rail .side-label { pointer-events: none; }
+.side-rail .side-dot {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0;
+}
+.side-rail .side-label {
+  position: absolute;
+  opacity: 0;
+  white-space: nowrap;
+}
+.side-rail .side-mark {
+  display: grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  margin-inline: auto;
+  flex: none;
+  pointer-events: none;
+}
+.side-rail svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.side-rail:hover .side-dot,
+.side-rail[data-open="true"] .side-dot { position: static; opacity: 0.7; margin-inline-end: 10px; }
+.side-rail:hover .side-label,
+.side-rail[data-open="true"] .side-label {
+  position: static;
+  opacity: 1;
+  transition: opacity 0.1s linear;
+}
+.side-rail:hover .side-mark,
+.side-rail[data-open="true"] .side-mark { margin-inline: auto 0; }
+
+.to-top {
+  position: fixed;
+  inset-inline-end: 28px;
+  bottom: 28px;
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line-strong);
+  background: var(--bg);
+  color: var(--ink);
+  cursor: pointer;
+}
+.to-top span {
+  width: 10px;
+  height: 10px;
+  border-top: 1px solid currentColor;
+  border-right: 1px solid currentColor;
+  transform: translateY(3px) rotate(-45deg);
+}
+.to-top:hover { color: var(--accent); border-color: var(--accent); }
+
 .ring {
   position: fixed; left: 0; top: 0; width: 38px; height: 38px; margin: -19px 0 0 -19px;
   border: 1px solid var(--accent); border-radius: 50%; pointer-events: none; z-index: 80;

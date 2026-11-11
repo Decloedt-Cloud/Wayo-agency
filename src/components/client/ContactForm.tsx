@@ -17,7 +17,24 @@ export function ContactForm({ locale, form, privacy }: { locale: Locale; form: U
     { value: "unknown", label: form.offers.unknown },
   ] as const;
   const startedAt = useRef(0);
-  if (startedAt.current === 0) startedAt.current = Date.now();
+  if (startedAt.current === 0) {
+    let saved = 0;
+    if (typeof window !== "undefined") {
+      try {
+        saved = Number(sessionStorage.getItem("wayo-lead-started"));
+      } catch {
+        saved = 0;
+      }
+    }
+    startedAt.current = Number.isFinite(saved) && saved > 0 ? saved : Date.now();
+    if (typeof window !== "undefined") {
+      try {
+        sessionStorage.setItem("wayo-lead-started", String(startedAt.current));
+      } catch {
+        /* private mode */
+      }
+    }
+  }
   const [errors, setErrors] = useState<Errors>({});
   const [pending, setPending] = useState(false);
   const [done, setDone] = useState(false);

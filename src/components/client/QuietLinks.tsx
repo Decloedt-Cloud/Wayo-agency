@@ -5,6 +5,14 @@ import { useEffect } from "react";
 
 const pendingKey = "wayo-scroll";
 
+function jumpTo(top: number) {
+  const root = document.documentElement;
+  const previous = root.style.scrollBehavior;
+  root.style.scrollBehavior = "auto";
+  window.scrollTo(0, top);
+  root.style.scrollBehavior = previous;
+}
+
 function scrollToId(id: string, behavior: ScrollBehavior, started = performance.now()) {
   const target = document.getElementById(id);
   if (!target) {
@@ -12,7 +20,32 @@ function scrollToId(id: string, behavior: ScrollBehavior, started = performance.
     return;
   }
   const top = target.getBoundingClientRect().top + window.scrollY;
-  if (Math.abs(target.getBoundingClientRect().top) > 2) window.scrollTo({ top, behavior });
+  if (Math.abs(target.getBoundingClientRect().top) <= 2) return;
+  if (behavior === "auto") jumpTo(top);
+  else window.scrollTo({ top, behavior });
+}
+
+function followId(id: string) {
+  const hidden = [...document.querySelectorAll(".section, .flagship, .footer")].filter((node) => node instanceof HTMLElement);
+  const previous = hidden.map((node) => node.style.contentVisibility);
+  for (const node of hidden) node.style.contentVisibility = "visible";
+  const place = () => {
+    const target = document.getElementById(id);
+    if (!target) return;
+    const max = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+    const dest = Math.min(Math.max(0, target.getBoundingClientRect().top + window.scrollY), max);
+    if (Math.abs(window.scrollY - dest) > 2) jumpTo(dest);
+  };
+  place();
+  requestAnimationFrame(() => {
+    place();
+    requestAnimationFrame(() => {
+      place();
+      hidden.forEach((node, index) => {
+        node.style.contentVisibility = previous[index] ?? "";
+      });
+    });
+  });
 }
 
 export function QuietLinks() {
@@ -49,8 +82,7 @@ export function QuietLinks() {
       const next = `${url.pathname}${url.search}`;
       if (url.pathname === window.location.pathname) {
         if (window.location.hash) history.replaceState(history.state, "", next);
-        const reduce = document.documentElement.classList.contains("reduce");
-        scrollToId(id, reduce ? "auto" : "smooth");
+        followId(id);
         return;
       }
       try {

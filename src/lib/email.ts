@@ -11,14 +11,21 @@ type LeadMail = {
   message: string;
 };
 
+function visitorLabel(lead: LeadMail) {
+  const name = lead.name.replace(/[\r\n<>"]/g, " ").replace(/\s+/g, " ").trim().slice(0, 80);
+  const email = lead.email.replace(/[\r\n<>"]/g, "").trim();
+  return name ? `${name} — ${email}` : email;
+}
+
 function smtpSettings() {
   const host = process.env.CONTACT_SMTP_HOST?.trim();
   const port = Number.parseInt(process.env.CONTACT_SMTP_PORT || "587", 10);
   const user = process.env.CONTACT_SMTP_USER?.trim();
   const pass = process.env.CONTACT_SMTP_PASS;
-  const from = (process.env.CONTACT_SMTP_FROM || user || "").trim();
-  if (!host || !user || !pass || !from || !Number.isFinite(port)) return null;
-  return { host, port, user, pass, from };
+  const from = user;
+  const inbox = (process.env.CONTACT_SMTP_FROM || process.env.CONTACT_TO_EMAIL || user || "").trim();
+  if (!host || !user || !pass || !from || !inbox || !Number.isFinite(port)) return null;
+  return { host, port, user, pass, from, inbox };
 }
 
 export async function sendLeadEmails(lead: LeadMail, settings: SettingsRecord, locale: Locale = "fr"): Promise<void> {
@@ -28,7 +35,7 @@ export async function sendLeadEmails(lead: LeadMail, settings: SettingsRecord, l
     return;
   }
 
-  const inbox = settings.contactEmail?.trim() || process.env.CONTACT_TO_EMAIL?.trim();
+  const inbox = smtp.inbox || settings.contactEmail?.trim() || process.env.CONTACT_TO_EMAIL?.trim();
   const transporter = nodemailer.createTransport({
     host: smtp.host,
     port: smtp.port,
@@ -38,34 +45,36 @@ export async function sendLeadEmails(lead: LeadMail, settings: SettingsRecord, l
     connectionTimeout: 10000,
     socketTimeout: 10000,
   });
-  const from = `Wayo Agency <${smtp.from}>`;
+  const agency = `Wayo Agency <${smtp.from}>`;
+  const visitor = { name: visitorLabel(lead), address: smtp.from };
 
-  try {
-    if (inbox) {
-      await transporter.sendMail({
-        from,
-        to: inbox,
-        replyTo: lead.email,
-        subject: "Nouveau message — Wayo Agency",
-        text: [
-          `Langue : ${locale}`,
-          `Offre : ${lead.offer}`,
-          `Nom : ${lead.name}`,
-          `Email : ${lead.email}`,
-          `Stack : ${lead.stack ?? "—"}`,
-          "",
-          lead.message,
-        ].join("\n"),
-      });
+  const notice = [
+    `Langue : ${locale}`,
+    `Offre : ${lead.offer}`,
+    `Nom : ${lead.name}`,
+    `Email : ${lead.email}`,
+    `Stack : ${lead.stack ?? "—"}`,
+    "",
+    lead.message,
+  ].join("\n");
+  const thanks = visitorThanks(locale);
+  const jobs = [
+    inbox
+      ? transporter.sendMail({
+          from: visitor,
+          replyTo: lead.email,
+          to: inbox,
+          subject: "Nouveau message — Wayo Agency",
+          text: notice,
+        })
+      : Promise.resolve(),
+    transporter.sendMail({ from: agency, to: lead.email, replyTo: inbox, subject: thanks.subject, text: thanks.text }),
+  ];
+  const results = await Promise.allSettled(jobs);
+  for (const result of results) {
+    if (result.status === "rejected") {
+      const err = result.reason as { code?: string; responseCode?: number };
+      console.error("email_failed", err.code ?? "", err.responseCode ?? "");
     }
-    const thanks = visitorThanks(locale);
-    await transporter.sendMail({
-      from,
-      to: lead.email,
-      subject: thanks.subject,
-      text: thanks.text,
-    });
-  } catch {
-    console.error("email_failed");
   }
 }

@@ -7,7 +7,7 @@ export type Ui = {
   skip: string;
   navLabel: string;
   langLabel: string;
-  nav: { constat: string; method: string; offers: string; faq: string };
+  nav: { home: string; constat: string; method: string; offers: string; faq: string; book: string; footer: string };
   book: string;
   bookArrow: string;
   seeOffers: string;
@@ -101,7 +101,7 @@ const fr: Ui = {
   skip: "Aller au contenu",
   navLabel: "Navigation principale",
   langLabel: "Langue",
-  nav: { constat: "Constat", method: "Méthode", offers: "Offres", faq: "FAQ" },
+  nav: { home: "Accueil", constat: "Constat", method: "Méthode", offers: "Offres", faq: "FAQ", book: "Réserver", footer: "Pied de page" },
   book: "Réserver un audit",
   bookArrow: "Réserver un audit →",
   seeOffers: "Voir les offres",
@@ -201,7 +201,7 @@ const en: Ui = {
   skip: "Skip to content",
   navLabel: "Main navigation",
   langLabel: "Language",
-  nav: { constat: "Problem", method: "Method", offers: "Offers", faq: "FAQ" },
+  nav: { home: "Home", constat: "Problem", method: "Method", offers: "Offers", faq: "FAQ", book: "Book", footer: "Footer" },
   book: "Book an audit",
   bookArrow: "Book an audit →",
   seeOffers: "See the offers",
@@ -301,7 +301,7 @@ const ar: Ui = {
   skip: "تخطَّ إلى المحتوى",
   navLabel: "التنقل الرئيسي",
   langLabel: "اللغة",
-  nav: { constat: "الواقع", method: "المنهج", offers: "العروض", faq: "أسئلة" },
+  nav: { home: "الرئيسية", constat: "الواقع", method: "المنهج", offers: "العروض", faq: "أسئلة", book: "احجز", footer: "التذييل" },
   book: "احجز تدقيقاً",
   bookArrow: "احجز تدقيقاً ←",
   seeOffers: "شاهد العروض",

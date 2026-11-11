@@ -11,7 +11,7 @@ export async function loadContent(): Promise<PageContent> {
   try {
     return await cachedContent();
   } catch {
-    console.error("content_load_failed");
+    console.warn("content_load_failed");
     return fallbackPageContent();
   }
 }
